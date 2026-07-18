@@ -1,233 +1,304 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI Systems Studio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viktors Simonenko | System Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* CORE SETUP & RESET */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #050505;
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            min-height: 100vh;
+            padding: 40px 0;
+            place-items: center;
+            font-family: 'Urbanist', sans-serif;
+        }
 
-<style>
-body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: #0a0a16;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-}
+        /* SLIDE CONTAINER */
+        .slide-container {
+            align-items: flex-start;
+            background-color: #0A0A0A;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 60px;
+            position: relative;
+            width: 1280px;
+            border: 1px solid rgba(222, 255, 154, 0.05);
+        }
 
-#canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 100% 0%, rgba(222, 255, 154, 0.03) 0%, transparent 50%);
+            pointer-events: none; z-index: 0;
+        }
+        
+        .slide-container::after {
+            background: rgba(222, 255, 154, 0.1);
+            bottom: 60px; content: ''; height: 1px; left: 60px;
+            position: absolute; right: 60px; z-index: 0;
+        }
 
-.overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    z-index: 10;
-}
+        .slide-container > * { position: relative; z-index: 1; width: 100%; }
 
-.panel {
-    max-width: 900px;
-    background: rgba(10,10,22,0.6);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(79,172,254,0.15);
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-}
+        /* TYPOGRAPHY */
+        h1, h2, h3 { color: #F5F5F5; font-weight: 500; }
+        h1 span, h2 span { color: #DEFF9A; }
+        p, li, .subtitle { color: #A3A3A3; }
+        
+        h1 { font-size: 64px; line-height: 1.1; margin-bottom: 20px; font-weight: 700; letter-spacing: -1px; }
+        .slide-title { font-size: 54px; line-height: 1.1; margin-bottom: 40px; text-align: left; }
+        h3 { font-size: 26px; margin-bottom: 15px; color: #DEFF9A; font-family: 'JetBrains Mono', monospace; }
+        p { font-size: 20px; line-height: 1.5; }
+        .subtitle { font-size: 24px; line-height: 1.4; color: #D1D5DB; }
+        code { font-family: 'JetBrains Mono', monospace; background: rgba(222,255,154,0.1); padding: 2px 6px; border-radius: 4px; color: #DEFF9A; font-size: 0.9em; }
 
-h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
+        .content-area {
+            align-items: center; display: flex; flex-direction: column;
+            flex-grow: 1; justify-content: center; width: 100%;
+        }
 
-h2 {
-    margin-top: 25px;
-    font-size: 18px;
-}
+        /* LAYOUTS */
+        .title-layout { text-align: left; width: 100%; max-width: 1100px; }
+        .title-layout .mono-sub { font-family: 'JetBrains Mono', monospace; color: #DEFF9A; font-size: 20px; margin-bottom: 20px; display: block; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; align-items: start; }
+        .three-column { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; width: 100%; align-items: stretch; }
 
-p {
-    color: #b8c7e0;
-    font-size: 14px;
-    line-height: 1.5;
-}
+        /* TILES */
+        .tile {
+            background-color: #121212; border-radius: 12px;
+            border: 1px solid #2A2A2A; display: flex; flex-direction: column;
+            padding: 40px; text-align: left; height: 100%;
+        }
+        .tile .icon {
+            align-items: center; background-color: rgba(222, 255, 154, 0.05);
+            border-radius: 8px; color: #DEFF9A; display: flex;
+            font-size: 32px; height: 64px; justify-content: center;
+            margin-bottom: 24px; width: 64px; border: 1px solid rgba(222, 255, 154, 0.2);
+        }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
+        /* LISTS */
+        .tech-list { list-style: none; margin: 0; padding: 0; }
+        .tech-list li {
+            color: #D1D5DB; font-size: 20px; margin-bottom: 16px;
+            padding-left: 24px; position: relative; font-family: 'JetBrains Mono', monospace;
+        }
+        .tech-list li::before {
+            color: #DEFF9A; content: '>'; font-weight: bold;
+            left: 0; position: absolute; top: 0;
+        }
 
-.card {
-    background: rgba(255,255,255,0.04);
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 13px;
-}
+        /* DATA FLOW DIAGRAM */
+        .flow-diagram {
+            display: flex; flex-direction: column; gap: 15px; width: 100%;
+            background: #121212; padding: 30px; border-radius: 12px; border: 1px solid #2A2A2A;
+        }
+        .flow-node {
+            background: #1A1A1A; border: 1px solid rgba(222,255,154,0.3);
+            padding: 15px 20px; border-radius: 8px; color: #FFF;
+            font-family: 'JetBrains Mono', monospace; display: flex; justify-content: space-between;
+        }
+        .flow-arrow { color: #DEFF9A; text-align: center; font-size: 24px; line-height: 1; }
 
-.price {
-    color: #4facfe;
-    font-weight: bold;
-    margin-top: 5px;
-}
+        /* HIGHLIGHT NUMBERS */
+        .highlight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; width: 100%; }
+        .highlight-item { border-left: 3px solid #DEFF9A; padding-left: 24px; }
+        .highlight-item .num { font-family: 'JetBrains Mono', monospace; color: #DEFF9A; font-size: 48px; font-weight: 700; line-height: 1; margin-bottom: 10px; }
+        .highlight-item h4 { color: #FFF; font-size: 24px; margin-bottom: 10px; }
 
-.tag {
-    color: #8ab4f8;
-    font-size: 12px;
-    margin-bottom: 10px;
-}
-</style>
+    </style>
 </head>
-
 <body>
 
-<canvas id="canvas"></canvas>
-
-<div class="overlay">
-<div class="panel">
-
-<div class="tag">AI • Automation • Cyber-Physical Infrastructure • Web3 Systems</div>
-
-<h1>Systems Engineering Studio for Mission-Critical Infrastructure</h1>
-
-<p>
-We design, audit, and deploy AI-driven operational systems that connect software, hardware, data, and real-world execution into unified architectures.
-</p>
-
-<h2>Core Expertise</h2>
-<div class="grid">
-<div class="card">AI & Automation</div>
-<div class="card">Cyber-Physical Systems</div>
-<div class="card">Infrastructure</div>
-<div class="card">Web3 Systems</div>
+<!-- SLIDE 1: TITLE -->
+<div class="slide-container">
+    <div class="content-area" style="align-items: flex-start;">
+        <div class="title-layout">
+            <span class="mono-sub">USER_PROFILE // ID: VIKTORS_SIMONENKO</span>
+            <h1>Senior Systems Architect<br><span>Cyber-Physical Infrastructure</span></h1>
+            <p class="subtitle" style="margin-top: 30px; max-width: 900px;">
+                Specialized in offline-first sovereign architectures, deterministic control systems, and embedded infrastructure design. Bridging OT/IT in heavy manufacturing and controlled-environment agriculture systems.
+            </p>
+            <div style="margin-top: 40px; display: flex; gap: 30px; font-family: 'JetBrains Mono', monospace; color: #888;">
+                <span><i class="fa-solid fa-location-dot" style="color:#DEFF9A"></i> Saulkrasti, Latvia</span>
+                <span><i class="fa-solid fa-globe" style="color:#DEFF9A"></i> vitoog.github.io/Landingpage</span>
+            </div>
+        </div>
+    </div>
 </div>
 
-<h2>Engagement Models</h2>
-<div class="grid">
-<div class="card">System Audit<br><div class="price">$5K–$80K</div></div>
-<div class="card">Architecture Design<br><div class="price">$15K–$150K</div></div>
-<div class="card">Enterprise Deployment<br><div class="price">$50K–$1M+</div></div>
-<div class="card">Retainer<br><div class="price">$5K–$50K/mo</div></div>
+<!-- SLIDE 2: ENGINEERING MANIFESTO -->
+<div class="slide-container">
+    <h2 class="slide-title">Engineering <span>Manifesto</span></h2>
+    <div class="content-area">
+        <div class="highlight-grid">
+            <div class="highlight-item">
+                <div class="num">01</div>
+                <h4>Architecture Before Implementation</h4>
+                <p>System-first thinking. Explicit state ownership and explicit control loops. Production constraints ALWAYS precede theoretical elegance.</p>
+            </div>
+            <div class="highlight-item">
+                <div class="num">02</div>
+                <h4>Deterministic Behavior Over Heuristics</h4>
+                <p>Zero tolerance for hidden state. ONLY explicit data flow. Multiple executions MUST produce identical state without accumulation.</p>
+            </div>
+            <div class="highlight-item">
+                <div class="num">03</div>
+                <h4>Failure-First Design</h4>
+                <p>Assume runtime failure. Isolate faults immediately. Catch and lock return codes. ALWAYS provide a predictable degraded state (Safe Shutdown).</p>
+            </div>
+            <div class="highlight-item">
+                <div class="num">04</div>
+                <h4>Single Source of Truth (SSOT)</h4>
+                <p>One meaning = one file. Change by overwrite ONLY. NEVER generate versions (v2, final). Git stores history; the filesystem stores active state.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<p style="margin-top:20px;">
-We design systems where intelligence, decision-making, and execution form a continuous loop.
-</p>
-
-<p style="opacity:0.6; font-size:12px;">
-linkedin.com/in/viktors-simonenko
-</p>
-
+<!-- SLIDE 3: CORE COMPETENCIES -->
+<div class="slide-container">
+    <h2 class="slide-title">Core <span>Competencies</span></h2>
+    <div class="content-area">
+        <div class="three-column">
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-microchip"></i></div>
+                <h3>Embedded & Edge</h3>
+                <ul class="tech-list">
+                    <li>ARM Cortex-M, ESP32</li>
+                    <li>Bare-metal C/C++</li>
+                    <li>RTOS (FreeRTOS, Zephyr)</li>
+                    <li>PWM sensor-actuator loops</li>
+                </ul>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+                <h3>Industrial IoT</h3>
+                <ul class="tech-list">
+                    <li>Modbus TCP/RTU</li>
+                    <li>MQTT, OPC UA, COAP</li>
+                    <li>Docker-based edge orchestration</li>
+                    <li>Telemetry (InfluxDB, PostgreSQL)</li>
+                </ul>
+            </div>
+            <div class="tile">
+                <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>OS & Security</h3>
+                <ul class="tech-list">
+                    <li>AOSP / GrapheneOS</li>
+                    <li>SELinux policy engineering</li>
+                    <li>Alpine / NixOS / Arch</li>
+                    <li>Boot optimization (systemd)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- SLIDE 4: ERICA OS -->
+<div class="slide-container">
+    <h2 class="slide-title"><span>ERICA OS</span> Architecture</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p style="margin-bottom: 20px;">Local-first orchestration and edge intelligence platform designed for constrained, disconnected environments.</p>
+                <ul class="tech-list">
+                    <li><strong>4-State FSM Core:</strong> INIT, NOMINAL, DEGRADED, SAFE_SHUTDOWN</li>
+                    <li><strong>Control Loops:</strong> PID-driven Modbus master, <100ms latency</li>
+                    <li><strong>Watchdog:</strong> 50ms heartbeat, CRC-16 validation</li>
+                    <li><strong>Sovereign State:</strong> SQLite memory, purely offline NLP</li>
+                </ul>
+            </div>
+            <div class="flow-diagram">
+                <div class="flow-node"><span>[Layer 1: Telemetry]</span><span>InfluxDB / Sensors</span></div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-node"><span>[Layer 2: FSM Runtime]</span><span>Modbus / Edge Node</span></div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-node"><span>[Layer 3: Agent Core]</span><span>Python / SQLite</span></div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-node"><span>[Layer 4: Governance]</span><span>Anchor OS / SSOT</span></div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+<!-- SLIDE 5: VITO AI OPERATIONS PLATFORM -->
+<div class="slide-container">
+    <h2 class="slide-title"><span>VITO AI</span> Operations Platform</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div style="background: #121212; padding: 40px; border-radius: 12px; border: 1px solid rgba(222,255,154,0.2);">
+                <h3 style="margin-bottom: 20px;">AI as a Control System</h3>
+                <p style="margin-bottom: 15px; color: #D1D5DB;">Traditional Model (❌): Model → Prediction → Output</p>
+                <p style="color: #DEFF9A; font-family: 'JetBrains Mono', monospace;">Operational Control System (✅):<br>
+                Evaluations = Sensors<br>
+                Agents = Controllers<br>
+                Context = State<br>
+                Automations = Actuators</p>
+            </div>
+            <div>
+                <h3 style="margin-bottom: 20px;">Rollout Strategy</h3>
+                <ul class="tech-list">
+                    <li><strong>UNDERSTAND:</strong> Map workflows, risks, ownership.</li>
+                    <li><strong>STABILIZE:</strong> Centralize access, implement observability.</li>
+                    <li><strong>STANDARDIZE:</strong> Shared agent runtime, CI/CD.</li>
+                    <li><strong>SCALE:</strong> Expand adoption safely.</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 16px; font-style: italic;">"NEVER scale before standardizing. Complexity must be managed at each step."</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-let w,h,particles=[];
-const mouse = {x:null,y:null,r:140};
-
-function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-    init();
-}
-window.addEventListener("resize", resize);
-
-window.addEventListener("mousemove", e=>{
-    mouse.x = e.x;
-    mouse.y = e.y;
-});
-
-window.addEventListener("mouseout", ()=>{
-    mouse.x = mouse.y = null;
-});
-
-class P{
-    constructor(){
-        this.x = Math.random()*w;
-        this.y = Math.random()*h;
-        this.vx = (Math.random()-0.5)*0.6;
-        this.vy = (Math.random()-0.5)*0.6;
-        this.r = Math.random()*2+1;
-    }
-    update(){
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if(this.x<0||this.x>w) this.vx*=-1;
-        if(this.y<0||this.y>h) this.vy*=-1;
-
-        this.draw();
-    }
-    draw(){
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-        ctx.fillStyle="#4facfe";
-        ctx.shadowBlur=10;
-        ctx.shadowColor="#4facfe";
-        ctx.fill();
-    }
-}
-
-function init(){
-    particles=[];
-    const count = (w*h)/12000;
-    for(let i=0;i<count;i++) particles.push(new P());
-}
-
-function connect(){
-    for(let a=0;a<particles.length;a++){
-        for(let b=a+1;b<particles.length;b++){
-            const dx = particles[a].x - particles[b].x;
-            const dy = particles[a].y - particles[b].y;
-            const d = dx*dx+dy*dy;
-
-            if(d<120*120){
-                const a2 = 1-d/14400;
-                ctx.strokeStyle=`rgba(79,172,254,${a2})`;
-                ctx.beginPath();
-                ctx.moveTo(particles[a].x,particles[a].y);
-                ctx.lineTo(particles[b].x,particles[b].y);
-                ctx.stroke();
-            }
-        }
-
-        if(mouse.x){
-            const dx = particles[a].x-mouse.x;
-            const dy = particles[a].y-mouse.y;
-            const d = dx*dx+dy*dy;
-
-            if(d<mouse.r*mouse.r){
-                ctx.strokeStyle="rgba(0,242,254,0.3)";
-                ctx.beginPath();
-                ctx.moveTo(particles[a].x,particles[a].y);
-                ctx.lineTo(mouse.x,mouse.y);
-                ctx.stroke();
-            }
-        }
-    }
-}
-
-function animate(){
-    ctx.clearRect(0,0,w,h);
-    particles.forEach(p=>p.update());
-    connect();
-    requestAnimationFrame(animate);
-}
-
-resize();
-animate();
-</script>
+<!-- SLIDE 6: GOLDEN GREENS CROP -->
+<div class="slide-container">
+    <h2 class="slide-title"><span>Golden Greens Crop</span> (AgTech)</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p style="margin-bottom: 20px;">Cultivation Intelligence Infrastructure bridging biological morphology with cyber-physical deterministic control loops.</p>
+                <ul class="tech-list">
+                    <li><strong>SB Holder®:</strong> Substrate management & orchestration</li>
+                    <li><strong>GVagon®:</strong> Telemetry layer & power distribution</li>
+                    <li><strong>Hormotix:</strong> Phytohormone steering logic</li>
+                    <li><strong>Data Layer:</strong> FastAPI + SQLAlchemy Unified Entity Model</li>
+                </ul>
+            </div>
+            <div class="tile">
+                <h3 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Vertical Control Stack</h3>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #A3A3A3; text-align: center; line-height: 1.8;">
+                    Biology (ISR, Hormones)<br>
+                    <span style="color:#DEFF9A">↓</span><br>
+                    Nutrition (EC, pH, Nutrients)<br>
+                    <span style="color:#DEFF9A">↓</span><br>
+                    Telemetry (Sensors, Data)<br>
+                    <span style="color:#DEFF9A">↓</span><br>
+                    Automation (FSM Rules, Decisions)<br>
+                    <span style="color:#DEFF9A">↓</span><br>
+                    AI Layer (Predictive Optimization)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
+
+```
