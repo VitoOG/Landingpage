@@ -633,7 +633,7 @@
                 nodes[i].update();
                 nodes[i].draw();
 
-                if (mouse.x && mouse.y) {
+                if (mouse.x !== null && mouse.y !== null) {
                     const dx = nodes[i].x - mouse.x;
                     const dy = nodes[i].y - mouse.y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
@@ -641,4 +641,18 @@
                     if (dist < 140) {
                         ctx.beginPath();
                         ctx.moveTo(nodes[i].x, nodes[i].y);
-         
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(223, 255, 143, ${1 - dist / 140})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        animate();
+    </script>
+</body>
+</html>
