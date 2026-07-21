@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viktors Simonenko | Systems Architect</title>
+    <title>AI Systems Studio | Cyber-Physical Infrastructure</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg: #06070a;
-            --surface: rgba(16, 18, 22, 0.65);
-            --surface-border: rgba(223, 255, 143, 0.12);
+            --surface: rgba(16, 18, 22, 0.75);
+            --surface-border: rgba(223, 255, 143, 0.15);
             --border: #25282f;
             --primary: #deff9a;
             --text: #f5f5f5;
@@ -34,6 +35,557 @@
             font-family: var(--font-main);
         }
 
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 8%;
+            background: rgba(6, 7, 10, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin-left: 32px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 100px 8%;
+            position: relative;
+        }
+
+        .kicker {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .kicker::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        h1 {
+            font-size: clamp(38px, 4.5vw, 62px);
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .accent {
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--glow);
+        }
+
+        .lead {
+            color: var(--secondary);
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 680px;
+            margin-bottom: 32px;
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .architecture-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-panel {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+
+        .fsm-node-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fsm-node {
+            background: rgba(16, 18, 22, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .fsm-node:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(223, 255, 143, 0.15);
+            transform: translateX(4px);
+        }
+
+        .fsm-node .tag {
+            font-size: 10px;
+            color: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .fsm-node:hover .tag {
+            color: var(--primary);
+            border-color: var(--surface-border);
+        }
+
+        h2 {
+            font-size: 32px;
+            letter-spacing: -0.02em;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(223, 255, 143, 0.1);
+        }
+
+        .card h3 {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-family: var(--font-mono);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card p {
+            color: var(--secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .price-card .price {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 16px;
+            text-shadow: 0 0 10px rgba(223, 255, 143, 0.2);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .link-list {
+            list-style: none;
+            font-family: var(--font-mono);
+        }
+
+        .link-list li {
+            margin-bottom: 16px;
+        }
+
+        .link-list a {
+            color: var(--text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .link-list a:hover {
+            color: var(--primary);
+        }
+
+        footer {
+            padding: 40px 8%;
+            border-top: 1px solid var(--border);
+            color: var(--secondary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            background: var(--bg);
+        }
+
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 60px;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="bg-noise"></div>
+
+    <nav>
+        <a href="#" class="brand">
+            <span class="dot"></span>
+            <span>AI Systems Studio</span>
+        </a>
+        <div class="nav-links">
+            <a href="#expertise">Expertise</a>
+            <a href="#engagement">Engagement</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div>
+                <div class="kicker">AI • Automation • Cyber-Physical • Web3</div>
+                <h1>Systems Engineering for <span class="accent">Mission-Critical</span> Infrastructure</h1>
+                <p class="lead">We design, audit, and deploy AI-driven operational systems that connect software, hardware, telemetry data, and real-world execution into unified, deterministic architectures.</p>
+            </div>
+            
+            <div class="architecture-container">
+                <div class="glass-panel fsm-node-container">
+                    <div class="fsm-node">
+                        <span>Physical Telemetry & Sensors</span>
+                        <span class="tag">INPUT</span>
+                    </div>
+                    <div class="fsm-node">
+                        <span>Autonomous Decision Loop</span>
+                        <span class="tag">EVAL</span>
+                    </div>
+                    <div class="fsm-node">
+                        <span>Deterministic Control Core</span>
+                        <span class="tag">STATE</span>
+                    </div>
+                    <div class="fsm-node">
+                        <span>Real-world Execution</span>
+                        <span class="tag">ACT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise">
+            <h2>Core Expertise</h2>
+            <div class="grid-4">
+                <div class="card">
+                    <h3>AI & Automation</h3>
+                    <p>Agentic workflows, evaluation systems acting as dynamic sensors, and sovereign offline-first AI models.</p>
+                </div>
+                <div class="card">
+                    <h3>Cyber-Physical Systems</h3>
+                    <p>Hardware-software orchestration, industrial sensor-actuator loops, PID controllers, and Modbus protocol interfaces.</p>
+                </div>
+                <div class="card">
+                    <h3>Sovereign Infrastructure</h3>
+                    <p>Hardened OS, edge computing deployments, zero-trust network boundaries, and containerized runtimes.</p>
+                </div>
+                <div class="card">
+                    <h3>Web3 & Cryptography</h3>
+                    <p>Decentralized state verification, cryptographic audit trails, and automated smart-contract execution loops.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="engagement">
+            <h2>Engagement Models</h2>
+            <div class="grid-4">
+                <div class="card price-card">
+                    <div>
+                        <h3>System Audit</h3>
+                        <p>In-depth architecture analysis, flaw identification, security validation, and optimization roadmap.</p>
+                    </div>
+                    <div class="price">$5K – $80K</div>
+                </div>
+
+                <div class="card price-card">
+                    <div>
+                        <h3>Architecture Design</h3>
+                        <p>Complete system blueprinting, state machine modeling, API boundary definitions, and technical spec.</p>
+                    </div>
+                    <div class="price">$15K – $150K</div>
+                </div>
+
+                <div class="card price-card">
+                    <div>
+                        <h3>Enterprise Deployment</h3>
+                        <p>Full lifecycle implementation, hardware-software integration, testing, and production rollout.</p>
+                    </div>
+                    <div class="price">$50K – $1M+</div>
+                </div>
+
+                <div class="card price-card">
+                    <div>
+                        <h3>Architectural Retainer</h3>
+                        <p>Continuous system supervision, emergent technology integration, and operational oversight.</p>
+                    </div>
+                    <div class="price">$5K – $50K /mo</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact & Inquiries</h2>
+            <div class="contact-content">
+                <div class="glass-panel">
+                    <p style="font-size: 16px; color: var(--text); line-height: 1.6;">
+                        We design systems where intelligence, decision-making, and execution form a continuous, fail-safe loop.
+                    </p>
+                </div>
+                <ul class="link-list">
+                    <li><a href="https://linkedin.com/in/viktors-simonenko" target="_blank" rel="noopener"><span>→</span> linkedin.com/in/viktors-simonenko</a></li>
+                    <li><a href="https://github.com/vitoog" target="_blank" rel="noopener"><span>→</span> github.com/vitoog</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>© 2026 AI Systems Studio</div>
+        <div>Cyber-Physical Architecture</div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let mouse = { x: null, y: null };
+        let nodes = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initGraph();
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Node {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.baseX = x;
+                this.baseY = y;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (Math.abs(this.x - this.baseX) > 20) this.vx *= -1;
+                if (Math.abs(this.y - this.baseY) > 20) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = '#25282f';
+                ctx.fill();
+            }
+        }
+
+        function initGraph() {
+            nodes = [];
+            const spacing = 100;
+            const cols = Math.ceil(width / spacing);
+            const rows = Math.ceil(height / spacing);
+
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    const x = i * spacing + (Math.random() - 0.5) * 15;
+                    const y = j * spacing + (Math.random() - 0.5) * 15;
+                    nodes.push(new Node(x, y));
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < nodes.length; i++) {
+                nodes[i].update();
+                nodes[i].draw();
+
+                if (mouse.x) {
+                    const dx = nodes[i].x - mouse.x;
+                    const dy = nodes[i].y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 140) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(223, 255, 143, ${0.25 * (1 - dist / 140)})`;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        animate();
+    </script>
+</body>
+</html>
         body {
             min-height: 100vh;
             overflow-x: hidden;
