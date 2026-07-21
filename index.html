@@ -1,40 +1,637 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viktors Simonenko | System Architecture</title>
+    <title>Viktors Simonenko | Systems Architect</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CORE SETUP & RESET */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background-color: #050505;
-            display: grid;
-            gap: 40px;
-            grid-template-columns: 1fr;
-            min-height: 100vh;
-            padding: 40px 0;
-            place-items: center;
-            font-family: 'Urbanist', sans-serif;
+        :root {
+            --bg: #06070a;
+            --surface: rgba(16, 18, 22, 0.65);
+            --surface-border: rgba(223, 255, 143, 0.12);
+            --border: #25282f;
+            --primary: #deff9a;
+            --text: #f5f5f5;
+            --secondary: #9aa1ad;
+            --glow: rgba(223, 255, 143, 0.35);
+            --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
-        /* SLIDE CONTAINER */
-        .slide-container {
-            align-items: flex-start;
-            background-color: #0A0A0A;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 8%;
+            background: rgba(6, 7, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin-left: 32px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 64px;
+            align-items: center;
+            padding: 120px 8% 80px 8%;
+        }
+
+        .kicker {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .kicker::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        h1 {
+            font-size: clamp(42px, 5vw, 68px);
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .accent {
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--glow);
+        }
+
+        .lead {
+            color: var(--secondary);
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 580px;
+            margin-bottom: 32px;
+        }
+
+        .specs {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 40px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--secondary);
+        }
+
+        .specs span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .specs span::before {
+            content: '>';
+            color: var(--primary);
+        }
+
+        .btns {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--bg);
+            font-weight: 700;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(223, 255, 143, 0.2);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 25px rgba(223, 255, 143, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .architecture-container {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glass-panel {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--surface-border);
             border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .fsm-node-container {
+            width: 100%;
             display: flex;
             flex-direction: column;
-            height: 720px;
-            justify-content: center;
-            overflow: hidden;
-            padding: 60px;
+            gap: 12px;
+            position: relative;
+        }
+
+        .fsm-node {
+            background: rgba(16, 18, 22, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fsm-node:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(223, 255, 143, 0.15);
+            transform: scale(1.02);
+        }
+
+        .fsm-node .tag {
+            font-size: 10px;
+            color: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .fsm-node:hover .tag {
+            color: var(--primary);
+            border-color: var(--surface-border);
+        }
+
+        section {
+            padding: 120px 8%;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 36px;
+            letter-spacing: -0.02em;
+            margin-bottom: 48px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--surface-border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(223, 255, 143, 0.1);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-family: var(--font-mono);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card p {
+            color: var(--secondary);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            color: var(--secondary);
+            margin-bottom: 24px;
+        }
+
+        .link-list {
+            list-style: none;
+            font-family: var(--font-mono);
+        }
+
+        .link-list li {
+            margin-bottom: 16px;
+        }
+
+        .link-list a {
+            color: var(--text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .link-list a:hover {
+            color: var(--primary);
+        }
+
+        footer {
+            padding: 40px 8%;
+            border-top: 1px solid var(--border);
+            color: var(--secondary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            background: var(--bg);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 140px;
+                gap: 48px;
+            }
+            .architecture-container {
+                height: 440px;
+            }
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="bg-noise"></div>
+
+    <nav>
+        <a href="#" class="brand">Viktors Simonenko</a>
+        <div class="nav-links">
+            <a href="#about">Philosophy</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div>
+                <div class="kicker">Systems Architect</div>
+                <h1>Designing <span class="accent">Deterministic</span><br>Cyber‑Physical Systems</h1>
+                <p class="lead">Senior Systems Architect focused on Edge Computing, Industrial Automation, Embedded Systems, AI Operations, and Sovereign Infrastructure.</p>
+                <div class="specs">
+                    <span>Offline-first</span>
+                    <span>Mission-critical</span>
+                    <span>Industrial AI</span>
+                </div>
+                <div class="btns">
+                    <a href="#projects" class="btn btn-primary">Portfolio</a>
+                    <a href="https://github.com/vitoog" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+                </div>
+            </div>
+            
+            <div class="architecture-container">
+                <div class="glass-panel fsm-node-container" style="width: 100%; max-width: 380px;">
+                    <div class="fsm-node" data-node="0">
+                        <span>Telemetry / PLC</span>
+                        <span class="tag">INPUT</span>
+                    </div>
+                    <div class="fsm-node" data-node="1">
+                        <span>Edge Runtime</span>
+                        <span class="tag">EXEC</span>
+                    </div>
+                    <div class="fsm-node" data-node="2">
+                        <span>Finite State Machine</span>
+                        <span class="tag">STATE</span>
+                    </div>
+                    <div class="fsm-node" data-node="3">
+                        <span>AI Agent</span>
+                        <span class="tag">EVAL</span>
+                    </div>
+                    <div class="fsm-node" data-node="4">
+                        <span>Decision Engine</span>
+                        <span class="tag">LOGIC</span>
+                    </div>
+                    <div class="fsm-node" data-node="5">
+                        <span>Industrial Control</span>
+                        <span class="tag">ACT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <h2>Engineering Philosophy</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Architecture First</h3>
+                    <p>Systems are fully designed before implementation. Explicit ownership, deterministic state boundaries, and clear observable data flow.</p>
+                </div>
+                <div class="card">
+                    <h3>Failure First</h3>
+                    <p>Every subsystem explicitly defines degraded modes, operational isolation boundaries, and deterministic recovery strategies.</p>
+                </div>
+                <div class="card">
+                    <h3>Offline First</h3>
+                    <p>Sovereign infrastructure designed to operate reliably with minimal external dependencies or network connectivity.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2>Featured Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>ERICA OS <span>01</span></h3>
+                    <p>Local-first orchestration platform with a deterministic FSM runtime, edge AI integration, and real-time industrial automation capability.</p>
+                </div>
+                <div class="card">
+                    <h3>Golden Greens <span>02</span></h3>
+                    <p>AgTech platform integrating complex biological processes with cyber-physical control systems for autonomous vertical farming.</p>
+                </div>
+                <div class="card">
+                    <h3>VITO AI <span>03</span></h3>
+                    <p>Operational AI architecture where evaluations act as dynamic sensors and sovereign agents function as precise system controllers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <h2>Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p>Open for consultations, system architectural reviews, and high-load mission-critical system design.</p>
+                </div>
+                <ul class="link-list">
+                    <li><a href="mailto:your@email.com"><span>→</span> your@email.com</a></li>
+                    <li><a href="https://github.com/vitoog" target="_blank" rel="noopener"><span>→</span> github.com/vitoog</a></li>
+                    <li><a href="https://linkedin.com/in/viktors-simonenko" target="_blank" rel="noopener"><span>→</span> linkedin.com/in/viktors-simonenko</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>© 2026 Viktors Simonenko</div>
+        <div>Systems Architecture Portfolio</div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let mouse = { x: null, y: null, targetX: null, targetY: null };
+        let nodes = [];
+        let connections = [];
+        let pulses = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initGraph();
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', (e) => {
+            mouse.targetX = e.clientX;
+            mouse.targetY = e.clientY;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.targetX = null;
+            mouse.targetY = null;
+        });
+
+        class Node {
+            constructor(x, y, isFixed = false, id = null) {
+                this.x = x;
+                this.y = y;
+                this.baseX = x;
+                this.baseY = y;
+                this.vx = (Math.random() - 0.5) * 0.2;
+                this.vy = (Math.random() - 0.5) * 0.2;
+                this.isFixed = isFixed;
+                this.id = id;
+            }
+
+            update() {
+                if (!this.isFixed) {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (Math.abs(this.x - this.baseX) > 15) this.vx *= -1;
+                    if (Math.abs(this.y - this.baseY) > 15) this.vy *= -1;
+                } else {
+                    this.x = this.baseX + Math.sin(Date.now() * 0.001 + this.id) * 2;
+                    this.y = this.baseY + Math.cos(Date.now() * 0.0015 + this.id) * 2;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.isFixed ? 3 : 1.5, 0, Math.PI * 2);
+                ctx.fillStyle = this.isFixed ? '#deff9a' : '#25282f';
+                ctx.fill();
+            }
+        }
+
+        class Pulse {
+            constructor(fromNode, toNode) {
+                this.from = fromNode;
+                this.to = toNode;
+                this.progress = 0;
+                this.speed = 0.005 + Math.random() * 0.008;
+            }
+
+            update() {
+                this.progress += this.speed;
+                return this.progress >= 1;
+            }
+
+            draw() {
+                const x = this.from.x + (this.to.x - this.from.x) * this.progress;
+                const y = this.from.y + (this.to.y - this.from.y) * this.progress;
+
+                ctx.beginPath();
+                ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = '#deff9a';
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = '#deff9a';
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        function initGraph() {
+            nodes = [];
+            connections = [];
+
+            // Grid Background Nodes
+            const spacing = 120;
+            const cols = Math.ceil(width / spacing);
+            const rows = Math.ceil(height / spacing);
+
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    const x = i * spacing + (Math.random() - 0.5) * 20;
+                    const y = j * spacing + (Math.random() - 0.5) * 20;
+                    nodes.push(new Node(x, y));
+                }
+            }
+
+            // Sync with FSM U            padding: 60px;
             position: relative;
             width: 1280px;
             border: 1px solid rgba(222, 255, 154, 0.05);
