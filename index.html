@@ -1,658 +1,1041 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viktors Simonenko | Systems Architect</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #06070a;
-            --surface: rgba(16, 18, 22, 0.75);
-            --surface-border: rgba(223, 255, 143, 0.15);
-            --border: #25282f;
-            --primary: #deff9a;
-            --text: #f5f5f5;
-            --secondary: #9aa1ad;
-            --glow: rgba(223, 255, 143, 0.35);
-            --font-main: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Viktors Simonenko — Senior Systems Architect specializing in Cyber-Physical Infrastructure, Edge Computing, Industrial Automation, Sovereign Infrastructure, OT/IT integration and resilient distributed systems.">
+<meta name="theme-color" content="#06070a">
+<title>Viktors Simonenko | Systems Architect</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        html {
-            scroll-behavior: smooth;
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: var(--font-main);
-        }
+<style>
+:root{
+  --bg:#06070a;
+  --surface:rgba(15,17,21,.80);
+  --surface-strong:rgba(12,14,18,.95);
+  --border:#25282f;
+  --border-soft:rgba(223,255,143,.15);
+  --primary:#deff9a;
+  --text:#f3f4f2;
+  --secondary:#9aa1ad;
+  --muted:#626975;
+  --font-main:"Space Grotesk",-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono:"JetBrains Mono",monospace;
+  --max-width:1320px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--text)}
+body{
+  min-height:100vh;overflow-x:hidden;background:
+  radial-gradient(circle at 74% 9%,rgba(223,255,143,.055),transparent 32%),var(--bg);
+  color:var(--text);font-family:var(--font-main);
+}
+a{color:inherit}
+::selection{background:var(--primary);color:var(--bg)}
+#bg-canvas{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none;opacity:.72}
+.bg-noise{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.026;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:19px 6%;
+  background:rgba(6,7,10,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:15px;letter-spacing:-.02em}
+.brand-dot{width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 9px var(--primary)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{
+  color:var(--secondary);text-decoration:none;font:12px var(--font-mono);transition:color .2s ease
+}
+.nav-links a:hover{color:var(--primary)}
+main{position:relative;z-index:2}
+section{padding:105px 6%}
+.container{width:min(var(--max-width),100%);margin:auto}
+.section-label{color:var(--primary);font:11px var(--font-mono);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.section-label:before{content:"> ";color:var(--primary)}
+h2{font-size:clamp(30px,3.3vw,44px);line-height:1.08;letter-spacing:-.035em;margin-bottom:18px}
+h2::after{
+  content:"";display:inline-block;width:18%;height:1px;background:var(--border);
+  vertical-align:middle;margin-left:22px
+}
+.section-intro{max-width:780px;color:var(--secondary);font-size:16px;line-height:1.7}
+.divider{height:1px;background:linear-gradient(90deg,var(--border),transparent);margin:32px 0 36px}
 
-        body {
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;gap:68px;
+  align-items:center;padding-top:130px
+}
+.hero-kicker{
+  display:flex;align-items:center;gap:9px;color:var(--primary);
+  font:12px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px
+}
+.hero-kicker:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--primary);box-shadow:0 0 10px var(--primary)}
+h1{font-size:clamp(44px,5.5vw,76px);line-height:.98;letter-spacing:-.055em;margin-bottom:26px}
+.accent{color:var(--primary);text-shadow:0 0 20px rgba(223,255,143,.20)}
+.hero-lead{max-width:700px;color:var(--secondary);font-size:18px;line-height:1.65;margin-bottom:28px}
+.hero-lead strong{color:var(--text);font-weight:500}
+.hero-specs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:32px}
+.spec{
+  padding:8px 10px;border:1px solid var(--border);border-radius:5px;
+  color:var(--secondary);font:10px var(--font-mono)
+}
+.spec:before{content:"•";color:var(--primary);margin-right:7px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  min-height:46px;padding:0 20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;
+  text-decoration:none;font:12px var(--font-mono);transition:.25s ease
+}
+.btn-primary{
+  color:var(--bg);background:var(--primary);border:1px solid var(--primary);font-weight:700;
+  box-shadow:0 0 18px rgba(223,255,143,.14)
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(223,255,143,.28)}
+.btn-secondary{color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{color:var(--primary);border-color:var(--primary);transform:translateY(-2px)}
 
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-        }
+.architecture{display:flex;align-items:center;justify-content:center;min-height:520px;position:relative}
+.architecture:before{
+  content:"";position:absolute;width:350px;height:350px;border-radius:50%;
+  background:radial-gradient(circle,rgba(223,255,143,.09),transparent 67%);filter:blur(10px)
+}
+.arch-panel{
+  position:relative;z-index:2;width:min(450px,100%);padding:22px;border-radius:12px;
+  background:var(--surface);border:1px solid var(--border-soft);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 30px 70px rgba(0,0,0,.55)
+}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-bottom:14px;margin-bottom:12px;border-bottom:1px solid var(--border);
+  font:10px var(--font-mono);color:var(--muted);letter-spacing:.08em
+}
+.status{color:var(--primary)}
+.flow{display:flex;flex-direction:column;gap:8px}
+.node{
+  display:flex;justify-content:space-between;align-items:center;padding:14px 15px;
+  background:rgba(8,10,13,.78);border:1px solid var(--border);border-radius:7px;
+  font:11px var(--font-mono);transition:.25s ease
+}
+.node:hover{transform:translateX(4px);border-color:var(--primary);box-shadow:0 0 18px rgba(223,255,143,.08)}
+.node-tag{font-size:9px;color:var(--muted);border:1px solid var(--border);padding:3px 6px;border-radius:4px}
+.node:hover .node-tag{color:var(--primary);border-color:rgba(223,255,143,.3)}
+.mini-states{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}
+.mini-state{padding:9px;border:1px solid var(--border);border-radius:5px;text-align:center;color:var(--secondary);font:9px var(--font-mono)}
+.mini-state.active{color:var(--primary);border-color:rgba(223,255,143,.28)}
 
-        .bg-noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
+.positioning{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:linear-gradient(90deg,transparent,rgba(223,255,143,.022),transparent)}
+.positioning-grid{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:start}
+.positioning h3{font-size:clamp(26px,3vw,39px);line-height:1.14;letter-spacing:-.035em}
+.positioning h3 span{color:var(--primary)}
+.positioning-text{color:var(--secondary);font-size:16px;line-height:1.75}
+.positioning-text p+p{margin-top:15px}
+.positioning-text strong{color:var(--text);font-weight:500}
 
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 8%;
-            background: rgba(6, 7, 10, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-        }
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{
+  padding:26px;min-height:238px;background:var(--surface);border:1px solid var(--border-soft);
+  border-radius:10px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  transition:.3s cubic-bezier(.16,1,.3,1)
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(223,255,143,.42);box-shadow:0 20px 45px rgba(0,0,0,.35)}
+.card-num{color:var(--muted);font:10px var(--font-mono);margin-bottom:22px}
+.card h3{font-size:19px;line-height:1.2;margin-bottom:11px}
+.card h3 span{color:var(--primary)}
+.card p{color:var(--secondary);font-size:13px;line-height:1.65}
+.card-list{list-style:none;margin-top:17px}
+.card-list li{color:var(--secondary);font:10px var(--font-mono);margin-bottom:7px}
+.card-list li:before{content:"→";color:var(--primary);margin-right:7px}
+.price{color:var(--primary);font:17px var(--font-mono);margin-top:22px}
 
-        .brand {
-            font-weight: 700;
-            font-size: 18px;
-            letter-spacing: -0.02em;
-            color: var(--text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}
+.product{
+  display:grid;grid-template-columns:58px 1fr;gap:0;padding:25px;
+  background:rgba(13,15,19,.82);border:1px solid var(--border);border-radius:9px;transition:.25s ease
+}
+.product:hover{transform:translateY(-3px);border-color:rgba(223,255,143,.36)}
+.product-index{color:var(--primary);font:13px var(--font-mono)}
+.product h3{font-size:18px;margin-bottom:7px}
+.product-meta{color:var(--primary);font:10px var(--font-mono);margin-bottom:11px}
+.product p{color:var(--secondary);font-size:13px;line-height:1.6}
 
-        .brand .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--primary);
-        }
+.failure{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.failure-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:65px;align-items:center}
+.failure-title{font-size:clamp(34px,4vw,56px);line-height:1;letter-spacing:-.045em}
+.failure-title span{color:var(--primary)}
+.failure-text{color:var(--secondary);font-size:16px;line-height:1.7}
+.failure-text p+p{margin-top:14px}
+.failure-chain{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:25px}
+.failure-step{padding:8px 10px;border:1px solid var(--border);border-radius:5px;color:var(--text);font:10px var(--font-mono)}
+.failure-arrow{color:var(--primary);font:11px var(--font-mono)}
 
-        .nav-links a {
-            color: var(--secondary);
-            text-decoration: none;
-            margin-left: 32px;
-            font-family: var(--font-mono);
-            font-size: 14px;
-            transition: color 0.2s ease;
-        }
+.arch-stack{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.stack-card{padding:28px}
+.stack-flow{display:flex;flex-direction:column;margin-top:20px}
+.stack-row{
+  display:grid;grid-template-columns:145px 1fr;gap:20px;padding:14px 0;
+  border-bottom:1px solid var(--border);font:11px var(--font-mono)
+}
+.stack-row:last-child{border-bottom:0}
+.stack-layer{color:var(--primary)}
+.stack-tech{color:var(--secondary)}
 
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+.stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.stack-item{
+  padding:15px 14px;background:rgba(13,15,19,.65);border:1px solid var(--border);
+  border-radius:6px;color:var(--secondary);font:10px var(--font-mono);transition:.2s ease
+}
+.stack-item:hover{color:var(--primary);border-color:rgba(223,255,143,.32)}
 
-        main {
-            position: relative;
-            z-index: 2;
-        }
+.reference{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.reference-card{padding:30px}
+.reference-card h3{font-size:23px;margin-bottom:12px}
+.reference-card p{color:var(--secondary);font-size:14px;line-height:1.68}
+.reference-list{list-style:none;margin-top:18px}
+.reference-list li{
+  padding:9px 0;border-bottom:1px solid var(--border);color:var(--secondary);font:10px var(--font-mono)
+}
+.reference-list li:before{content:"→";color:var(--primary);margin-right:8px}
 
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 64px;
-            align-items: center;
-            padding: 140px 8% 80px 8%;
-        }
+.engagement{display:grid;grid-template-columns:1.25fr .75fr;gap:17px}
+.engagement-main{padding:34px}
+.engagement-main h3{font-size:26px;margin-bottom:14px}
+.engagement-main p{max-width:760px;color:var(--secondary);font-size:15px;line-height:1.7}
+.engagement-list{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:26px}
+.engagement-item{padding:15px;border:1px solid var(--border);background:rgba(6,7,10,.4);color:var(--secondary);font:11px var(--font-mono)}
+.engagement-item strong{display:block;color:var(--primary);margin-bottom:6px}
+.engagement-side{padding:30px}
+.engagement-side h3{color:var(--primary);font:12px var(--font-mono);margin-bottom:12px}
+.engagement-side ul{list-style:none}
+.engagement-side li{padding:10px 0;border-bottom:1px solid var(--border);color:var(--secondary);font-size:13px}
+.engagement-side li:before{content:"+";color:var(--primary);margin-right:8px}
 
-        .kicker {
-            font-family: var(--font-mono);
-            color: var(--primary);
-            font-size: 13px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+.contact{display:grid;grid-template-columns:1.15fr .85fr;gap:17px}
+.contact-main{padding:38px}
+.contact-main h3{font-size:clamp(29px,3.5vw,45px);line-height:1.05;letter-spacing:-.04em;margin-bottom:15px}
+.contact-main p{color:var(--secondary);font-size:15px;line-height:1.7;max-width:680px;margin-bottom:25px}
+.contact-links{padding:26px}
+.contact-links a{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:15px 0;border-bottom:1px solid var(--border);
+  text-decoration:none;color:var(--secondary);font:11px var(--font-mono)
+}
+.contact-links a:hover{color:var(--primary)}
+.contact-links a span:last-child{color:var(--primary)}
 
-        .kicker::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--primary);
-        }
+footer{
+  position:relative;z-index:2;border-top:1px solid var(--border);padding:30px 6%;
+  display:flex;justify-content:space-between;gap:20px;color:var(--muted);font:10px var(--font-mono)
+}
 
-        h1 {
-            font-size: clamp(38px, 4.5vw, 64px);
-            line-height: 1.05;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin-bottom: 24px;
-        }
-
-        .accent {
-            color: var(--primary);
-            text-shadow: 0 0 20px var(--glow);
-        }
-
-        .lead {
-            color: var(--secondary);
-            font-size: 18px;
-            line-height: 1.6;
-            max-width: 580px;
-            margin-bottom: 32px;
-        }
-
-        .specs {
-            display: flex;
-            gap: 24px;
-            margin-bottom: 40px;
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--secondary);
-        }
-
-        .specs span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .specs span::before {
-            content: '>';
-            color: var(--primary);
-        }
-
-        .btns {
-            display: flex;
-            gap: 16px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 14px;
-            text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: var(--bg);
-            font-weight: 700;
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 15px rgba(223, 255, 143, 0.2);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 0 25px rgba(223, 255, 143, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .architecture-container {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .glass-panel {
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--surface-border);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 420px;
-        }
-
-        .fsm-node-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .fsm-node {
-            background: rgba(16, 18, 22, 0.85);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 14px 18px;
-            font-family: var(--font-mono);
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .fsm-node:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(223, 255, 143, 0.15);
-            transform: translateX(4px);
-        }
-
-        .fsm-node .tag {
-            font-size: 10px;
-            color: var(--secondary);
-            border: 1px solid var(--border);
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .fsm-node:hover .tag {
-            color: var(--primary);
-            border-color: var(--surface-border);
-        }
-
-        section {
-            padding: 100px 8%;
-            position: relative;
-        }
-
-        h2 {
-            font-size: 32px;
-            letter-spacing: -0.02em;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        h2::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--surface-border);
-            border-radius: 12px;
-            padding: 28px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(223, 255, 143, 0.1);
-        }
-
-        .card h3 {
-            font-size: 18px;
-            color: var(--primary);
-            margin-bottom: 12px;
-            font-family: var(--font-mono);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card p {
-            color: var(--secondary);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .card .price {
-            font-family: var(--font-mono);
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-top: 20px;
-            text-shadow: 0 0 10px rgba(223, 255, 143, 0.2);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .contact-info p {
-            font-size: 16px;
-            color: var(--secondary);
-            line-height: 1.6;
-        }
-
-        .link-list {
-            list-style: none;
-            font-family: var(--font-mono);
-        }
-
-        .link-list li {
-            margin-bottom: 16px;
-        }
-
-        .link-list a {
-            color: var(--text);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: color 0.2s ease;
-            font-size: 14px;
-        }
-
-        .link-list a:hover {
-            color: var(--primary);
-        }
-
-        footer {
-            padding: 40px 8%;
-            border-top: 1px solid var(--border);
-            color: var(--secondary);
-            font-family: var(--font-mono);
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-            background: var(--bg);
-        }
-
-        @media (max-width: 960px) {
-            .hero {
-                grid-template-columns: 1fr;
-                padding-top: 120px;
-                gap: 48px;
-            }
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+@media (max-width:1050px){
+  .hero{grid-template-columns:1fr;gap:35px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .positioning-grid,.failure-grid,.arch-stack,.reference,.engagement,.contact{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  nav{padding:17px 5%}.nav-links{display:none}
+  section{padding:80px 5%}.hero{padding-top:115px}
+  h1{font-size:43px}.hero-lead{font-size:16px}
+  .grid,.product-grid,.stack-grid,.engagement-list{grid-template-columns:1fr}
+  .stack-row{grid-template-columns:1fr;gap:6px}
+  footer{padding:25px 5%;flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
 </head>
+
 <body>
+<canvas id="bg-canvas"></canvas>
+<div class="bg-noise"></div>
 
-    <canvas id="bg-canvas"></canvas>
-    <div class="bg-noise"></div>
+<nav>
+  <a class="brand" href="#">
+    <span class="brand-dot"></span>
+    <span>VIKTORS SIMONENKO</span>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#systems">Systems</a>
+    <a href="#work">R&amp;D</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-    <nav>
-        <a href="#" class="brand">
-            <span class="dot"></span>
-            <span>AI Systems Studio</span>
-        </a>
-        <div class="nav-links">
-            <a href="#expertise">Expertise</a>
-            <a href="#engagement">Engagement</a>
-            <a href="#contact">Contact</a>
+<main>
+
+<section class="hero container">
+  <div>
+    <div class="hero-kicker">SENIOR SYSTEMS ARCHITECT / ENGINEERING</div>
+    <h1>Engineering <span class="accent">systems</span> that operate in the real world.</h1>
+    <p class="hero-lead">
+      I design and deploy cyber-physical, edge and industrial infrastructure where
+      <strong>hardware, software, networks, control logic and data</strong>
+      must operate as one reliable system.
+    </p>
+
+    <div class="hero-specs">
+      <span class="spec">LOCAL-FIRST</span>
+      <span class="spec">DETERMINISTIC</span>
+      <span class="spec">FAILURE-FIRST</span>
+      <span class="spec">RECOVERABLE</span>
+      <span class="spec">SECURITY-BY-DESIGN</span>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#services">START A PROJECT</a>
+      <a class="btn btn-secondary" href="https://github.com/vitoog" target="_blank" rel="noopener">GITHUB</a>
+    </div>
+  </div>
+
+  <div class="architecture">
+    <div class="arch-panel">
+      <div class="panel-head">
+        <span>CYBER-PHYSICAL PIPELINE</span>
+        <span class="status">● ARCHITECTURE</span>
+      </div>
+
+      <div class="flow">
+        <div class="node"><span>Physical Process</span><span class="node-tag">REALITY</span></div>
+        <div class="node"><span>Sensors / Telemetry</span><span class="node-tag">INPUT</span></div>
+        <div class="node"><span>Edge Runtime</span><span class="node-tag">EXEC</span></div>
+        <div class="node"><span>State / Control Core</span><span class="node-tag">STATE</span></div>
+        <div class="node"><span>Network / Backend</span><span class="node-tag">DATA</span></div>
+        <div class="node"><span>Intelligence / Decision</span><span class="node-tag">LOGIC</span></div>
+        <div class="node"><span>Actuation / Recovery</span><span class="node-tag">ACTION</span></div>
+      </div>
+
+      <div class="mini-states">
+        <div class="mini-state active">NOMINAL</div>
+        <div class="mini-state">DEGRADED</div>
+        <div class="mini-state">SAFE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="positioning">
+  <div class="container positioning-grid">
+    <div>
+      <div class="section-label">SYSTEM MODEL</div>
+      <h3>I do not sell isolated technologies. <span>I engineer the system around the problem.</span></h3>
+    </div>
+
+    <div class="positioning-text">
+      <p>A production system is not just an application, server or controller.</p>
+      <p>
+        It is a chain of
+        <strong>physical process → sensors → state → computation → communication → control → actuation → feedback.</strong>
+      </p>
+      <p>
+        My work connects those layers into architectures that remain understandable,
+        observable and recoverable when individual components fail.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-label">01 / ENGINEERING SERVICES</div>
+    <h2>Fix. Design. Build. Deploy.</h2>
+    <p class="section-intro">
+      Productized engineering for companies that need a difficult technical problem solved
+      without turning it into an open-ended consulting program.
+    </p>
+    <div class="divider"></div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-num">01 / FIX</div>
+        <h3>Troubleshooting &amp; <span>Emergency Support</span></h3>
+        <p>Rapid diagnostics, root-cause analysis, fault isolation and recovery for unstable infrastructure and cyber-physical systems.</p>
+        <div class="price">From €1,500</div>
+      </article>
+
+      <article class="card">
+        <div class="card-num">02 / AUDIT</div>
+        <h3>Technical Audit &amp; <span>Vulnerability Assessment</span></h3>
+        <p>Architecture, infrastructure, network exposure, security boundaries, configuration, reliability and operational risk assessment.</p>
+        <div class="price">From €2,500</div>
+      </article>
+
+      <article class="card">
+        <div class="card-num">03 / ARCHITECT</div>
+        <h3>Architecture Design &amp; <span>System Optimization</span></h3>
+        <p>System decomposition, state and control architecture, integration boundaries, resilience, security and target-state design.</p>
+        <div class="price">From €3,500</div>
+      </article>
+
+      <article class="card">
+        <div class="card-num">04 / BUILD</div>
+        <h3>Custom Edge / <span>Industrial Software</span></h3>
+        <p>Embedded systems, edge runtimes, telemetry, industrial protocols, automation and hardware/software integration.</p>
+        <div class="price">From €5,000</div>
+      </article>
+
+      <article class="card">
+        <div class="card-num">05 / DEPLOY</div>
+        <h3>DevSecOps &amp; <span>CI/CD Implementation</span></h3>
+        <p>Reproducible deployment, hardened Linux, containers, zero-trust networking, CI/CD, configuration control and rollback.</p>
+        <div class="price">From €5,000</div>
+      </article>
+
+      <article class="card">
+        <div class="card-num">06 / INDUSTRIAL</div>
+        <h3>Cyber-Physical <span>Systems Engineering</span></h3>
+        <p>OT/IT integration, brownfield modernization, greenfield architecture and complex industrial CPS deployments.</p>
+        <div class="price">Custom B2B scope</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">02 / PRODUCTIZED ENGINEERING</div>
+    <h2>Defined technical outcomes.</h2>
+    <p class="section-intro">
+      Bounded engineering packages designed to solve concrete infrastructure, edge and reliability problems
+      with an explicit scope, delivery window and technical outcome.
+    </p>
+    <div class="divider"></div>
+
+    <div class="product-grid">
+
+      <article class="product">
+        <div class="product-index">01</div>
+        <div>
+          <h3>Private Zero-Trust Network</h3>
+          <div class="product-meta">3–7 DAYS · €5K–15K</div>
+          <p>Private encrypted infrastructure perimeter with controlled access, segmentation, secure remote operations and reproducible configuration.</p>
         </div>
-    </nav>
+      </article>
 
-    <main>
-        <section class="hero">
-            <div>
-                <div class="kicker">SYSTEMS ARCHITECT</div>
-                <h1>Engineering <span class="accent">Mission-Critical</span> Cyber‑Physical Systems</h1>
-                <p class="lead">We design, audit, and deploy AI-driven operational systems that connect software, hardware, telemetry data, and real-world execution into unified architectures.</p>
-                <div class="specs">
-                    <span>Offline-first</span>
-                    <span>Deterministic</span>
-                    <span>Sovereign</span>
-                </div>
-                <div class="btns">
-                    <a href="#engagement" class="btn btn-primary">Services</a>
-                    <a href="https://github.com/vitoog" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-                </div>
-            </div>
-            
-            <div class="architecture-container">
-                <div class="glass-panel fsm-node-container">
-                    <div class="fsm-node">
-                        <span>Physical Telemetry</span>
-                        <span class="tag">INPUT</span>
-                    </div>
-                    <div class="fsm-node">
-                        <span>Edge Runtime</span>
-                        <span class="tag">EXEC</span>
-                    </div>
-                    <div class="fsm-node">
-                        <span>Control State Core</span>
-                        <span class="tag">STATE</span>
-                    </div>
-                    <div class="fsm-node">
-                        <span>AI Agent Loop</span>
-                        <span class="tag">EVAL</span>
-                    </div>
-                    <div class="fsm-node">
-                        <span>Decision Engine</span>
-                        <span class="tag">LOGIC</span>
-                    </div>
-                    <div class="fsm-node">
-                        <span>Real-world Execution</span>
-                        <span class="tag">ACT</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <article class="product">
+        <div class="product-index">02</div>
+        <div>
+          <h3>Deterministic Infrastructure Engine</h3>
+          <div class="product-meta">5–10 DAYS · €8K–20K</div>
+          <p>Versioned infrastructure, reproducible deployment, validation, rollback and explicit recovery paths for production environments.</p>
+        </div>
+      </article>
 
-        <section id="expertise">
-            <h2>Core Expertise</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>AI & Automation</h3>
-                    <p>Agentic workflows, evaluation systems acting as dynamic sensors, and sovereign offline-first AI models.</p>
-                </div>
-                <div class="card">
-                    <h3>Cyber-Physical Systems</h3>
-                    <p>Hardware-software orchestration, industrial sensor-actuator loops, PID controllers, and Modbus protocol interfaces.</p>
-                </div>
-                <div class="card">
-                    <h3>Sovereign Infrastructure</h3>
-                    <p>Hardened OS, edge computing deployments, zero-trust network boundaries, and containerized runtimes.</p>
-                </div>
-                <div class="card">
-                    <h3>Web3 & Cryptography</h3>
-                    <p>Decentralized state verification, cryptographic audit trails, and automated smart-contract execution loops.</p>
-                </div>
-            </div>
-        </section>
+      <article class="product">
+        <div class="product-index">03</div>
+        <div>
+          <h3>Failsafe Edge Hardware System</h3>
+          <div class="product-meta">1–3 WEEKS · €15K–40K+</div>
+          <p>Local-first edge control for environments where network or cloud availability cannot be a physical dependency.</p>
+        </div>
+      </article>
 
-        <section id="engagement">
-            <h2>Engagement Models</h2>
-            <div class="grid">
-                <div class="card">
-                    <div>
-                        <h3>System Audit</h3>
-                        <p>In-depth architecture analysis, flaw identification, security validation, and optimization roadmap.</p>
-                    </div>
-                    <div class="price">$5K – $80K</div>
-                </div>
+      <article class="product">
+        <div class="product-index">04</div>
+        <div>
+          <h3>Telemetry &amp; Control Backend</h3>
+          <div class="product-meta">3–10 DAYS · €8K–25K+</div>
+          <p>Validated telemetry and control infrastructure with API boundaries, time-series storage, observability and operational state.</p>
+        </div>
+      </article>
 
-                <div class="card">
-                    <div>
-                        <h3>Architecture Design</h3>
-                        <p>Complete system blueprinting, state machine modeling, API boundary definitions, and technical spec.</p>
-                    </div>
-                    <div class="price">$15K – $150K</div>
-                </div>
+    </div>
+  </div>
+</section>
 
-                <div class="card">
-                    <div>
-                        <h3>Enterprise Deployment</h3>
-                        <p>Full lifecycle implementation, hardware-software integration, testing, and production rollout.</p>
-                    </div>
-                    <div class="price">$50K – $1M+</div>
-                </div>
+<section>
+  <div class="container">
+    <div class="section-label">03 / SYSTEMS ENGINEERING</div>
+    <h2>From system risk to operational continuity.</h2>
+    <p class="section-intro">
+      Enterprise engagements are structured as a progression from paid assessment to architecture,
+      engineering, deployment and long-term operational responsibility.
+    </p>
+    <div class="divider"></div>
 
-                <div class="card">
-                    <div>
-                        <h3>Architectural Retainer</h3>
-                        <p>Continuous system supervision, emergent technology integration, and operational oversight.</p>
-                    </div>
-                    <div class="price">$5K – $50K /mo</div>
-                </div>
-            </div>
-        </section>
+    <div class="grid">
 
-        <section id="contact">
-            <h2>Contact & Inquiries</h2>
-            <div class="contact-content">
-                <div class="glass-panel">
-                    <p>We design systems where intelligence, decision-making, and execution form a continuous, fail-safe loop.</p>
-                </div>
-                <ul class="link-list">
-                    <li><a href="https://linkedin.com/in/viktors-simonenko" target="_blank" rel="noopener"><span>→</span> linkedin.com/in/viktors-simonenko</a></li>
-                    <li><a href="https://github.com/vitoog" target="_blank" rel="noopener"><span>→</span> github.com/vitoog</a></li>
-                </ul>
-            </div>
-        </section>
-    </main>
+      <article class="card">
+        <div class="card-num">01 / AUDIT</div>
+        <h3>Cyber-Physical <span>Systems Audit</span></h3>
+        <p>Current-state architecture, asset analysis, control and data flows, security boundaries, failure modes, reliability gaps and target architecture.</p>
+        <div class="price">€5K–15K+</div>
+      </article>
 
-    <footer>
-        <div>© 2026 AI Systems Studio</div>
-        <div>Viktors Simonenko</div>
-    </footer>
+      <article class="card">
+        <div class="card-num">02 / ARCHITECTURE</div>
+        <h3>Architecture &amp; <span>Engineering Design</span></h3>
+        <p>System decomposition, state machines, control architecture, OT/IT integration, security, observability, recovery and deployment architecture.</p>
+        <div class="price">€15K–100K+</div>
+      </article>
 
-    <script>
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
+      <article class="card">
+        <div class="card-num">03 / DUE DILIGENCE</div>
+        <h3>Technical <span>Due Diligence</span></h3>
+        <p>Independent assessment before acquisition, modernization or major infrastructure investment: architecture, security, reliability, scalability and vendor risk.</p>
+        <div class="price">€10K–50K+</div>
+      </article>
 
-        let width, height;
-        let mouse = { x: null, y: null };
-        let nodes = [];
+      <article class="card">
+        <div class="card-num">04 / PILOT</div>
+        <h3>Engineering &amp; <span>Pilot</span></h3>
+        <p>Architecture implementation, edge integration, security hardening, telemetry, control integration and acceptance-driven prototype or pilot deployment.</p>
+        <div class="price">€30K–150K+</div>
+      </article>
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            initGraph();
-        }
+      <article class="card">
+        <div class="card-num">05 / DEPLOYMENT</div>
+        <h3>Production <span>Deployment</span></h3>
+        <p>Milestone-based production deployment covering infrastructure, orchestration, networking, security, commissioning and acceptance.</p>
+        <div class="price">€50K–300K+</div>
+      </article>
 
-        window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
+      <article class="card">
+        <div class="card-num">06 / ENTERPRISE</div>
+        <h3>Enterprise <span>Rollout</span></h3>
+        <p>Large-scale industrial deployment with multi-node architecture, governance, security requirements, operational integration and long-term evolution.</p>
+        <div class="price">€100K–1M+</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">04 / OPERATIONS</div>
+    <h2>Engineering responsibility after deployment.</h2>
+    <p class="section-intro">
+      Ongoing architecture and infrastructure operations are delivered as an external systems engineering function,
+      not commodity software support.
+    </p>
+    <div class="divider"></div>
+
+    <div class="engagement">
+      <div class="glass engagement-main">
+        <h3>Architecture / Operations Retainer</h3>
+        <p>
+          Continuous monitoring, security maintenance, incident response, configuration management,
+          recovery, architecture reviews, vendor evaluation, capacity planning and system evolution.
+        </p>
+
+        <div class="engagement-list">
+          <div class="engagement-item"><strong>MONITORING</strong>Infrastructure, nodes, connectivity and system health.</div>
+          <div class="engagement-item"><strong>SECURITY</strong>Patch management, reviews, hardening and incident response.</div>
+          <div class="engagement-item"><strong>RECOVERY</strong>Backup, configuration control and operational recovery.</div>
+          <div class="engagement-item"><strong>ARCHITECTURE</strong>Continuous system evolution and technical oversight.</div>
+        </div>
+      </div>
+
+      <div class="glass engagement-side">
+        <h3>RECURRING ENGAGEMENT</h3>
+        <ul>
+          <li>Fractional Systems Architect — €5K–25K+/month</li>
+          <li>Infrastructure / Operations SLA — €5K–50K+/month</li>
+          <li>Enterprise environments — €25K–50K+/month+</li>
+          <li>Measured outcomes and acceptance criteria</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="failure">
+  <div class="container failure-grid">
+    <div>
+      <div class="section-label">05 / RELIABILITY ENGINEERING</div>
+      <div class="failure-title">Design for <span>failure.</span></div>
+    </div>
+
+    <div class="failure-text">
+      <p>Networks disappear. Sensors produce invalid values. Power fails. Services become unavailable. Configurations drift.</p>
+      <p>A reliable system does not assume these events will never happen. It defines what happens when they do.</p>
+
+      <div class="failure-chain">
+        <span class="failure-step">DETECT</span>
+        <span class="failure-arrow">→</span>
+        <span class="failure-step">ISOLATE</span>
+        <span class="failure-arrow">→</span>
+        <span class="failure-step">DEGRADE</span>
+        <span class="failure-arrow">→</span>
+        <span class="failure-step">RECOVER</span>
+        <span class="failure-arrow">→</span>
+        <span class="failure-step">VERIFY</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="container">
+    <div class="section-label">06 / SYSTEM ARCHITECTURE</div>
+    <h2>Software is only one layer.</h2>
+    <p class="section-intro">
+      I work across the complete engineering boundary: physical process, embedded control,
+      edge compute, industrial networking, backend infrastructure, security and operational intelligence.
+    </p>
+    <div class="divider"></div>
+
+    <div class="arch-stack">
+      <div class="glass stack-card">
+        <div class="section-label">SYSTEM STACK</div>
+
+        <div class="stack-flow">
+          <div class="stack-row"><div class="stack-layer">HARDWARE</div><div class="stack-tech">Sensors · Actuators · Power · Industrial Devices</div></div>
+          <div class="stack-row"><div class="stack-layer">FIRMWARE</div><div class="stack-tech">C / C++ · Embedded Control · UART · I²C · SPI</div></div>
+          <div class="stack-row"><div class="stack-layer">PROTOCOLS</div><div class="stack-tech">RS-485 · Modbus · CAN · MQTT · TCP/IP</div></div>
+          <div class="stack-row"><div class="stack-layer">EDGE</div><div class="stack-tech">Linux · NixOS · Alpine · Containers · Local Runtime</div></div>
+          <div class="stack-row"><div class="stack-layer">BACKEND</div><div class="stack-tech">Python · FastAPI · PostgreSQL · Redis · APIs</div></div>
+          <div class="stack-row"><div class="stack-layer">INTELLIGENCE</div><div class="stack-tech">Automation · FSM · AI Agents · Digital Twins</div></div>
+          <div class="stack-row"><div class="stack-layer">OPERATIONS</div><div class="stack-tech">Monitoring · Security · CI/CD · Recovery</div></div>
+        </div>
+      </div>
+
+      <div class="glass stack-card">
+        <div class="section-label">TECHNOLOGY</div>
+
+        <div class="stack-grid" style="grid-template-columns:1fr 1fr;margin-top:22px">
+          <div class="stack-item">Linux</div>
+          <div class="stack-item">Python</div>
+          <div class="stack-item">C / C++</div>
+          <div class="stack-item">Rust</div>
+          <div class="stack-item">FastAPI</div>
+          <div class="stack-item">PostgreSQL</div>
+          <div class="stack-item">TimescaleDB</div>
+          <div class="stack-item">MQTT</div>
+          <div class="stack-item">Modbus</div>
+          <div class="stack-item">CAN</div>
+          <div class="stack-item">Docker</div>
+          <div class="stack-item">Git</div>
+          <div class="stack-item">WireGuard</div>
+          <div class="stack-item">Tailscale</div>
+          <div class="stack-item">Headscale</div>
+          <div class="stack-item">SSH</div>
+          <div class="stack-item">Suricata</div>
+          <div class="stack-item">Zeek</div>
+          <div class="stack-item">Wazuh</div>
+          <div class="stack-item">Nmap</div>
+          <div class="stack-item">ESP32</div>
+          <div class="stack-item">Arduino</div>
+          <div class="stack-item">Edge Linux</div>
+          <div class="stack-item">Embedded Systems</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">07 / PRINCIPLES</div>
+    <h2>Architecture before implementation.</h2>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-num">01 / STATE</div>
+        <h3>Explicit State Ownership</h3>
+        <p>Critical state is explicit, inspectable and governed by defined transitions rather than hidden behavior.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">02 / CONTROL</div>
+        <h3>Deterministic Control</h3>
+        <p>Safety-critical and physical control boundaries remain predictable and independent from higher-level heuristics.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">03 / FAILURE</div>
+        <h3>Failure-First Design</h3>
+        <p>Invalid inputs, lost connectivity, component failure and configuration errors are part of the architecture.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">04 / RECOVERY</div>
+        <h3>Recoverability</h3>
+        <p>Systems should be observable, reproducible, recoverable and rebuildable rather than dependent on manual memory.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">05 / SOVEREIGNTY</div>
+        <h3>Local-First Operation</h3>
+        <p>Critical state and control remain local where possible. Cloud services are optional coordination and analytics layers.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">06 / SECURITY</div>
+        <h3>Security by Architecture</h3>
+        <p>Identity, segmentation, least privilege, encrypted transport, audit and recovery form one security boundary.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="section-label">08 / REFERENCE R&amp;D</div>
+    <h2>Cyber-physical systems in practice.</h2>
+    <p class="section-intro">
+      My own R&amp;D work provides a practical environment for validating architecture across physical,
+      computational and operational constraints.
+    </p>
+    <div class="divider"></div>
+
+    <div class="reference">
+      <article class="glass reference-card">
+        <div class="section-label">ERICA OS</div>
+        <h3>Sovereign CPS Runtime</h3>
+        <p>
+          Local-first infrastructure and orchestration architecture for autonomous edge operation,
+          explicit system state, telemetry, automation, diagnostics and recovery.
+        </p>
+        <ul class="reference-list">
+          <li>Deterministic control states</li>
+          <li>Local-first orchestration</li>
+          <li>Edge device integration</li>
+          <li>Telemetry and local memory</li>
+          <li>Offline operation</li>
+          <li>AI above deterministic boundaries</li>
+        </ul>
+      </article>
+
+      <article class="glass reference-card">
+        <div class="section-label">GOLDEN GREENS CROP / CEA</div>
+        <h3>Controlled-Environment Agriculture</h3>
+        <p>
+          Vertically integrated cultivation infrastructure combining hardware, embedded control,
+          IIoT, edge computing, telemetry, automation and biological process modeling.
+        </p>
+        <ul class="reference-list">
+          <li>Environmental control loops</li>
+          <li>Nutrient and water automation</li>
+          <li>Edge control and telemetry</li>
+          <li>Agro-photonics integration</li>
+          <li>Digital-twin concepts</li>
+          <li>Production-oriented CEA architecture</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">09 / APPLICATION DOMAINS</div>
+    <h2>Where the architecture applies.</h2>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-num">DOMAIN / 01</div>
+        <h3>Industrial Automation</h3>
+        <p>OT/IT integration, industrial networks, telemetry, edge control and modernization.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">DOMAIN / 02</div>
+        <h3>Industrial IoT</h3>
+        <p>Distributed sensing, gateways, telemetry pipelines and operational infrastructure.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">DOMAIN / 03</div>
+        <h3>Controlled-Environment Agriculture</h3>
+        <p>Environmental control, cultivation automation, resource systems and biological feedback.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">DOMAIN / 04</div>
+        <h3>Edge Infrastructure</h3>
+        <p>Autonomous local compute for constrained, remote or unreliable environments.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">DOMAIN / 05</div>
+        <h3>Infrastructure Security</h3>
+        <p>Network segmentation, secure access, hardening, monitoring and recovery.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">DOMAIN / 06</div>
+        <h3>Digital Twins &amp; R&amp;D</h3>
+        <p>Observed state, derived state, deterministic state identity and verification.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">10 / DELIVERY MODEL</div>
+    <h2>From problem to working system.</h2>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-num">01</div>
+        <h3>Diagnose</h3>
+        <p>Understand the actual system, constraints, dependencies and failure modes.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">02</div>
+        <h3>Model</h3>
+        <p>Define state, data flow, interfaces, control boundaries and operational assumptions.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">03</div>
+        <h3>Architect</h3>
+        <p>Define the target topology, security boundary, recovery strategy and implementation plan.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">04</div>
+        <h3>Build</h3>
+        <p>Implement infrastructure, firmware, backend services, integrations or automation.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">05</div>
+        <h3>Verify</h3>
+        <p>Test behavior against agreed requirements, including failure and degraded scenarios.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-num">06</div>
+        <h3>Deploy</h3>
+        <p>Deliver the working system with documentation, configuration and reproducible deployment where applicable.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">11 / ENGAGEMENT</div>
+    <h2>Defined scope. Defined outcome.</h2>
+
+    <div class="engagement">
+      <div class="glass engagement-main">
+        <h3>Engineering without open-ended consulting.</h3>
+        <p>
+          Engagements are structured around a concrete technical problem, explicit constraints
+          and a measurable outcome. Small deployments can become reference architectures;
+          reference architectures can become production systems.
+        </p>
+
+        <div class="engagement-list">
+          <div class="engagement-item"><strong>FIXED SCOPE</strong>Clearly defined technical work.</div>
+          <div class="engagement-item"><strong>FIXED WINDOW</strong>Days or weeks where practical.</div>
+          <div class="engagement-item"><strong>B2B PROJECT</strong>Architecture, implementation and integration.</div>
+          <div class="engagement-item"><strong>RETAINER</strong>Ongoing systems architecture and oversight.</div>
+        </div>
+      </div>
+
+      <div class="glass engagement-side">
+        <h3>BEST FIT</h3>
+        <ul>
+          <li>Industrial companies</li>
+          <li>Systems integrators</li>
+          <li>AgTech / CEA operators</li>
+          <li>IoT product teams</li>
+          <li>Hardware startups</li>
+          <li>Infrastructure teams</li>
+          <li>Brownfield modernization</li>
+          <li>DeepTech R&amp;D</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">12 / COMMERCIAL MODEL</div>
+    <h2>One system. Multiple revenue layers.</h2>
+    <p class="section-intro">
+      Engineering engagements create the initial relationship. Deployment creates infrastructure revenue.
+      Operations create recurring revenue. Reusable systems become platform and IP.
+    </p>
+    <div class="divider"></div>
+
+    <div class="arch-stack">
+      <div class="glass stack-card">
+        <div class="section-label">REVENUE ENGINE</div>
+        <div class="stack-flow">
+          <div class="stack-row"><div class="stack-layer">AUDIT</div><div class="stack-tech">€5K–15K+ · Proof of Work and qualification</div></div>
+          <div class="stack-row"><div class="stack-layer">ARCHITECTURE</div><div class="stack-tech">€15K–100K+ · Target system design</div></div>
+          <div class="stack-row"><div class="stack-layer">ENGINEERING</div><div class="stack-tech">€30K–150K+ · Pilot and integration</div></div>
+          <div class="stack-row"><div class="stack-layer">DEPLOYMENT</div><div class="stack-tech">€50K–300K+ · Production infrastructure</div></div>
+          <div class="stack-row"><div class="stack-layer">ENTERPRISE</div><div class="stack-tech">€100K–1M+ · Multi-site / industrial rollout</div></div>
+          <div class="stack-row"><div class="stack-layer">OPERATIONS</div><div class="stack-tech">€5K–50K+/month · SLA / architecture function</div></div>
+        </div>
+      </div>
+
+      <div class="glass stack-card">
+        <div class="section-label">PLATFORM / IP</div>
+        <div class="stack-flow">
+          <div class="stack-row"><div class="stack-layer">ERICA OS</div><div class="stack-tech">Local-first control, state and edge orchestration</div></div>
+          <div class="stack-row"><div class="stack-layer">EDGE MESH</div><div class="stack-tech">Sovereign connectivity and managed edge nodes</div></div>
+          <div class="stack-row"><div class="stack-layer">OPEN SOURCE</div><div class="stack-tech">$0 · Self-hosted adoption layer</div></div>
+          <div class="stack-row"><div class="stack-layer">MANAGED PRO</div><div class="stack-tech">$3–5 / node / month · Managed operations</div></div>
+          <div class="stack-row"><div class="stack-layer">ENTERPRISE</div><div class="stack-tech">$15K+/year · Sovereign deployment</div></div>
+          <div class="stack-row"><div class="stack-layer">CUSTOM IP</div><div class="stack-tech">Enterprise licenses, support and industrial deployment</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-label">13 / CONTACT</div>
+
+    <div class="contact">
+      <div class="glass contact-main">
+        <h3>Have a system that needs to <span class="accent">work?</span></h3>
+        <p>
+          Start with the system problem that needs to be solved: infrastructure, security, reliability, Edge integration, automation or a larger cyber-physical deployment.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:viksim1221@gmail.com?subject=Systems%20Engineering%20Inquiry">CONTACT DIRECTLY</a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/viktors-simonenko" target="_blank" rel="noopener">LINKEDIN</a>
+        </div>
+      </div>
+
+      <div class="glass contact-links">
+        <a href="mailto:viksim1221@gmail.com"><span>EMAIL</span><span>↗</span></a>
+        <a href="https://www.linkedin.com/in/viktors-simonenko" target="_blank" rel="noopener"><span>LINKEDIN</span><span>↗</span></a>
+        <a href="https://github.com/vitoog" target="_blank" rel="noopener"><span>GITHUB</span><span>↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© 2026 VIKTORS SIMONENKO</span>
+  <span>SYSTEMS ARCHITECT · CYBER-PHYSICAL INFRASTRUCTURE</span>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const canvas = document.getElementById("bg-canvas");
+  const ctx = canvas.getContext("2d");
+  const state = { width: 0, height: 0, nodes: [], mouseX: null, mouseY: null };
+
+  const CONFIG = {
+    spacing: 115,
+    jitter: 22,
+    mouseDistance: 155,
+    speed: 0.12
+  };
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    state.width = window.innerWidth;
+    state.height = window.innerHeight;
+
+    canvas.width = state.width * dpr;
+    canvas.height = state.height * dpr;
+    canvas.style.width = state.width + "px";
+    canvas.style.height = state.height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    initNodes();
+  }
+
+  function initNodes() {
+    state.nodes = [];
+
+    const cols = Math.ceil(state.width / CONFIG.spacing) + 1;
+    const rows = Math.ceil(state.height / CONFIG.spacing) + 1;
+
+    for (let x = 0; x < cols; x++) {
+      for (let y = 0; y < rows; y++) {
+        const baseX = x * CONFIG.spacing + (Math.random() - 0.5) * CONFIG.jitter;
+        const baseY = y * CONFIG.spacing + (Math.random() - 0.5) * CONFIG.jitter;
+
+        state.nodes.push({
+          x: baseX,
+          y: baseY,
+          baseX,
+          baseY,
+          vx: (Math.random() - 0.5) * CONFIG.speed,
+          vy: (Math.random() - 0.5) * CONFIG.speed
         });
+      }
+    }
+  }
 
-        window.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
+  function draw() {
+    ctx.clearRect(0, 0, state.width, state.height);
 
-        class Node {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.baseX = x;
-                this.baseY = y;
-                this.vx = (Math.random() - 0.5) * 0.2;
-                this.vy = (Math.random() - 0.5) * 0.2;
-            }
+    for (const node of state.nodes) {
+      node.x += node.vx;
+      node.y += node.vy;
 
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
+      if (Math.abs(node.x - node.baseX) > CONFIG.jitter) node.vx *= -1;
+      if (Math.abs(node.y - node.baseY) > CONFIG.jitter) node.vy *= -1;
 
-                if (Math.abs(this.x - this.baseX) > 15) this.vx *= -1;
-                if (Math.abs(this.y - this.baseY) > 15) this.vy *= -1;
-            }
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 1.2, 0, Math.PI * 2);
+      ctx.fillStyle = "#25282f";
+      ctx.fill();
+    }
 
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
-                ctx.fillStyle = '#25282f';
-                ctx.fill();
-            }
+    if (state.mouseX !== null && state.mouseY !== null) {
+      for (const node of state.nodes) {
+        const dx = node.x - state.mouseX;
+        const dy = node.y - state.mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < CONFIG.mouseDistance) {
+          const alpha = (1 - distance / CONFIG.mouseDistance) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y);
+          ctx.lineTo(state.mouseX, state.mouseY);
+          ctx.strokeStyle = "rgba(223,255,143," + alpha + ")";
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
         }
+      }
+    }
 
-        function initGraph() {
-            nodes = [];
-            const spacing = 110;
-            const cols = Math.ceil(width / spacing);
-            const rows = Math.ceil(height / spacing);
+    requestAnimationFrame(draw);
+  }
 
-            for (let i = 0; i < cols; i++) {
-                for (let j = 0; j < rows; j++) {
-                    const x = i * spacing + (Math.random() - 0.5) * 20;
-                    const y = j * spacing + (Math.random() - 0.5) * 20;
-                    nodes.push(new Node(x, y));
-                }
-            }
-        }
+  window.addEventListener("resize", resize, { passive: true });
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
+  window.addEventListener("mousemove", (event) => {
+    state.mouseX = event.clientX;
+    state.mouseY = event.clientY;
+  }, { passive: true });
 
-            for (let i = 0; i < nodes.length; i++) {
-                nodes[i].update();
-                nodes[i].draw();
+  window.addEventListener("mouseleave", () => {
+    state.mouseX = null;
+    state.mouseY = null;
+  }, { passive: true });
 
-                if (mouse.x !== null && mouse.y !== null) {
-                    const dx = nodes[i].x - mouse.x;
-                    const dy = nodes[i].y - mouse.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
+  resize();
+  draw();
+})();
+</script>
 
-                    if (dist < 140) {
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(mouse.x, mouse.y);
-                        ctx.strokeStyle = `rgba(223, 255, 143, ${1 - dist / 140})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
-
-        resize();
-        animate();
-    </script>
 </body>
 </html>
