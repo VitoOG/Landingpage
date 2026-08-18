@@ -195,21 +195,21 @@ The concept combines:
 - AI-assisted higher-level decision systems.
 The architecture separates safety-critical and deterministic control from higher-level computation.
 
-┌──────────────────────────────────────┐
-│        AI / Decision Layer           │
-├──────────────────────────────────────┤
-│      Edge Runtime / Orchestration    │
-├──────────────────────────────────────┤
-│     Telemetry / State Management     │
-├──────────────────────────────────────┤
-│     Deterministic Control Layer      │
-├──────────────────────────────────────┤
-│     Firmware / Embedded Runtime      │
-├──────────────────────────────────────┤
-│       Sensors / Actuators            │
-├──────────────────────────────────────┤
-│          Physical Process            │
-└──────────────────────────────────────┘
+┌──────────────────────────────
+│        AI / Decision Layer           
+├──────────────────────────────
+│      Edge Runtime / Orchestration    
+├──────────────────────────────
+│     Telemetry / State Management     
+├──────────────────────────────
+│     Deterministic Control Layer      
+├──────────────────────────────
+│     Firmware / Embedded Runtime      
+├──────────────────────────────
+│       Sensors / Actuators            
+├──────────────────────────────
+│          Physical Process            
+└──────────────────────────────
 
 CEA Systems
 
