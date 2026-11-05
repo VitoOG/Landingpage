@@ -1,0 +1,15 @@
+.eyebrow { display: flex; align-items: center; gap: 9px; margin: 0; color: var(--color-accent); font-family: var(--font-mono); font-size: 9px; letter-spacing: .12em; line-height: 1.5; text-transform: uppercase; }
+.eyebrow-mark { width: 6px; height: 6px; flex: 0 0 auto; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 12px rgb(185 213 142 / 42%); }
+.button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 13px; padding: 0 18px; border: 1px solid transparent; border-radius: var(--radius-sm); font-size: 12px; font-weight: 650; text-decoration: none; transition: background 160ms ease, border-color 160ms ease, transform 160ms ease; }
+.button-primary { background: var(--color-accent); color: #182015; }
+.button-primary:hover { transform: translateY(-2px); background: var(--color-accent-strong); }
+.text-link { display: inline-flex; align-items: center; gap: 9px; color: var(--color-text-soft); font-size: 12px; text-decoration: none; }
+.text-link:hover { color: var(--color-accent); }
+.hero-tags span { padding: 7px 10px; border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-muted); font-family: var(--font-mono); font-size: 9px; }
+
+
+/* Explicit language switch shared by the English and Russian pages. */
+.language-switch { display: inline-flex; align-items: center; gap: 3px; margin-left: 4px; padding: 3px; border: 1px solid var(--color-border); border-radius: 6px; }
+.language-option { display: inline-flex; min-width: 34px; min-height: 28px; align-items: center; justify-content: center; padding: 0 7px; border-radius: 4px; color: var(--color-text-soft); font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-decoration: none; }
+.language-option:hover { color: var(--color-accent-strong); }
+.language-option[aria-current="page"] { background: rgb(185 213 142 / 14%); color: var(--color-accent-strong); }
