@@ -68,8 +68,19 @@
 }
 
 @media (max-width: 480px) {
-  .wordmark-name { font-size: 18px; }
-  .wordmark-mark { width: 34px; height: 34px; }
+.wordmark-name {
+  font-size: 10px;
+  letter-spacing: .07em;
+}
+
+.wordmark-subtitle {
+  font-size: 8px;
+}
+
+.wordmark-mark {
+  width: 34px;
+  height: 34px;
+}
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 17px; }
   .hero-tags { margin-top: 30px; }
   .system-diagram { grid-template-columns: 1fr; }
