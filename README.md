@@ -65,3 +65,13 @@ The €400 Device-to-Service Integration Diagnostic is described as a bounded, r
     ├── brand/
     └── images/
 ```
+
+
+## Service catalogue
+
+- English: `/services/`
+- Russian: `/ru/services/`
+- Public data: `data/catalog.en.json`, `data/catalog.ru.json`
+- Catalogue UI: `js/catalog.js`, `css/catalog.css`
+- Internal sales strategy fields (`score`, `pilot`, `sales_angle`) are excluded from public data.
+- Listed prices are indicative and require commercial confirmation before engagement.
