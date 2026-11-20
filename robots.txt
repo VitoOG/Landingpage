@@ -1,0 +1,7 @@
+# GitHub Pages project site: this file is served below /Landingpage/ and does not control the host-level /robots.txt for vitoog.github.io.
+# Host-level crawler policy, if needed, must be published at https://vitoog.github.io/robots.txt.
+# Do not treat this project-path file as host-level robots policy.
+User-agent: *
+Allow: /
+
+Sitemap: https://vitoog.github.io/Landingpage/sitemap.xml

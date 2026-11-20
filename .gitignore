@@ -1,0 +1,3 @@
+*.pre-seo-*.bak
+__pycache__/
+*.py[cod]
