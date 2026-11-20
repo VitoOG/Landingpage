@@ -176,10 +176,11 @@
 
 .support-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 4px 16px;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
   width: min(100%, 420px);
+  min-width: 0;
   margin-top: 8px;
   padding: 12px 14px;
   border: 1px solid var(--color-border);
@@ -188,6 +189,7 @@
 }
 .support-card h3 {
   grid-column: 1;
+  min-width: 0;
   margin: 0;
   color: var(--color-text-soft);
   font-size: 11px;
@@ -195,14 +197,19 @@
 }
 .support-card p {
   grid-column: 1;
+  min-width: 0;
   margin: 0;
   color: var(--color-muted);
   font-size: 10px;
   line-height: 1.55;
 }
 .support-card .button {
-  grid-column: 2;
-  grid-row: 1 / 3;
-  justify-self: end;
+  grid-column: 1;
+  grid-row: auto;
+  justify-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 0;
+  white-space: normal;
 }
