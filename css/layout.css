@@ -13,10 +13,12 @@
   min-height: 76px;
   align-items: center;
   justify-content: space-between;
+  gap: clamp(18px, 2vw, 30px);
   margin-inline: auto;
 }
 .wordmark {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   gap: 11px;
   text-decoration: none;
@@ -53,7 +55,17 @@
   letter-spacing: .13em;
   line-height: 1.2;
 }
-.primary-navigation { display: flex; align-items: center; gap: clamp(18px, 2.8vw, 36px); }
+.primary-navigation {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: clamp(16px, 2.2vw, 30px);
+  white-space: nowrap;
+}
+.primary-navigation > a { flex: 0 0 auto; white-space: nowrap; }
+.primary-navigation .language-switch { flex: 0 0 auto; }
 .primary-navigation a {
   color: var(--color-text-soft);
   font-size: 12px;
