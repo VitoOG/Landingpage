@@ -206,10 +206,18 @@
 .support-card .button {
   grid-column: 1;
   grid-row: auto;
-  justify-self: stretch;
-  width: 100%;
+  justify-self: start;
+  width: fit-content;
   max-width: 100%;
   min-width: 0;
+  min-height: 36px;
   margin: 0;
+  padding: 7px 12px;
+  gap: 8px;
+  line-height: 1.35;
+  text-align: center;
   white-space: normal;
+}
+.support-card .button > span[aria-hidden="true"] {
+  flex: 0 0 auto;
 }
