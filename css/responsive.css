@@ -109,13 +109,3 @@
   .primary-navigation .language-switch { align-self: flex-start; margin: 11px 0 0; }
   .primary-navigation .language-switch a { min-height: 32px; padding: 0 10px; border-bottom: 0; }
 }
-
-@media (max-width: 760px) {
-  .support-card { width: 100%; max-width: 420px; }
-  .support-card .button { width: 100%; }
-}
-
-@media (max-width: 600px) {
-  .support-card { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .support-card .button { grid-column: 1; grid-row: auto; justify-self: start; width: auto; max-width: 100%; }
-}
