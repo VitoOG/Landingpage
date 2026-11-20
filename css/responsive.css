@@ -114,3 +114,8 @@
   .support-card { width: 100%; max-width: 420px; }
   .support-card .button { width: 100%; }
 }
+
+@media (max-width: 600px) {
+  .support-card { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .support-card .button { grid-column: 1; grid-row: auto; justify-self: start; width: auto; max-width: 100%; }
+}
