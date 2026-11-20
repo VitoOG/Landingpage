@@ -1,15 +1,4 @@
-@media (max-width: 1080px) {
-  .hero { grid-template-columns: minmax(0, 1fr); gap: 50px; padding-block: 78px 84px; }
-  .hero-copy { max-width: 780px; }
-  .hero-visual { width: min(700px, 100%); }
-  .scope-grid, .principles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .method-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .work-grid { grid-template-columns: 1fr; }
-  .work-card { min-height: 0; }
-  .work-link { margin-top: 20px; }
-}
-
-@media (max-width: 760px) {
+@media (max-width: 1000px) {
   .header-inner { min-height: 68px; }
   .nav-toggle {
     display: grid;
@@ -45,6 +34,22 @@
   .primary-navigation.is-open { display: flex; flex-direction: column; }
   .primary-navigation a { padding: 13px 0; border-bottom: 1px solid rgb(255 255 255 / 5%); font-size: 14px; }
   .primary-navigation a:last-child { border-bottom: 0; }
+  .primary-navigation .language-switch { align-self: flex-start; margin: 11px 0 0; }
+  .primary-navigation .language-switch a { min-height: 32px; padding: 0 10px; border-bottom: 0; }
+}
+
+@media (max-width: 1080px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 50px; padding-block: 78px 84px; }
+  .hero-copy { max-width: 780px; }
+  .hero-visual { width: min(700px, 100%); }
+  .scope-grid, .principles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .method-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .work-grid { grid-template-columns: 1fr; }
+  .work-card { min-height: 0; }
+  .work-link { margin-top: 20px; }
+}
+
+@media (max-width: 760px) {
   .hero { min-height: 0; padding-block: 68px 74px; }
   .hero h1 { font-size: clamp(42px, 11vw, 66px); }
   .system-diagram { grid-template-columns: minmax(0, 1fr) 126px; gap: 9px; }
@@ -102,10 +107,4 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
-}
-
-
-@media (max-width: 760px) {
-  .primary-navigation .language-switch { align-self: flex-start; margin: 11px 0 0; }
-  .primary-navigation .language-switch a { min-height: 32px; padding: 0 10px; border-bottom: 0; }
 }
