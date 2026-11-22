@@ -39,7 +39,7 @@ def graph(cfg,p,groups):
  page={"@type":p["schema_type"],"@id":p["canonical_url"]+"#webpage","url":p["canonical_url"],"name":p["title"],"description":p["description"],"inLanguage":p["language"],"isPartOf":{"@id":wid},"about":[{"@id":pid},{"@id":oid}]}
  if p["schema_type"]=="WebPage": page["mainEntity"]={"@id":pid}
  return {"@context":"https://schema.org","@graph":[
- {"@type":"WebSite","@id":wid,"url":base,"name":"Viktors Simonenko — Systems Architecture & Integration","inLanguage":sorted({x["language"] for x in groups[p["translation_group"]]}),"publisher":{"@id":pid}},
+ {"@type":"WebSite","@id":wid,"url":base,"name":"Golden Greens Crop","inLanguage":sorted({x["language"] for x in groups[p["translation_group"]]}),"publisher":{"@id":pid}},
  page,
  {"@type":"Person","@id":pid,**person,"url":base,"affiliation":{"@id":oid}},
  {"@type":"Organization","@id":oid,**org,"identifier":{"@type":"PropertyValue","propertyID":"Latvian Enterprise Registration Number","value":org["registration_number"]},"founder":{"@id":pid}}
@@ -48,7 +48,7 @@ def graph(cfg,p,groups):
 def block(cfg,p,groups):
  e=lambda x:html.escape(str(x),quote=True); alt=alternates(p,groups)
  pair=groups[p["translation_group"]]
- lines=[START,f"<title>{e(p['title'])}</title>",f'<meta name="description" content="{e(p["description"])}">','<meta name="robots" content="index,follow,max-image-preview:large">',f'<link rel="canonical" href="{e(p["canonical_url"])}">','<meta name="author" content="Viktors Simonenko">','<meta property="og:type" content="website">',f'<meta property="og:locale" content="{e(p["locale"])}">',f'<meta property="og:title" content="{e(p["title"])}">',f'<meta property="og:description" content="{e(p["description"])}">',f'<meta property="og:url" content="{e(p["canonical_url"])}">','<meta name="twitter:card" content="summary">']
+ lines=[START,f"<title>{e(p['title'])}</title>",f'<meta name="description" content="{e(p["description"])}">','<meta name="robots" content="index,follow,max-image-preview:large">',f'<link rel="canonical" href="{e(p["canonical_url"])}">','<meta name="author" content="Viktors Simonenko">','<meta property="og:type" content="website">','<meta property="og:site_name" content="Golden Greens Crop">',f'<meta property="og:locale" content="{e(p["locale"])}">',f'<meta property="og:title" content="{e(p["title"])}">',f'<meta property="og:description" content="{e(p["description"])}">',f'<meta property="og:url" content="{e(p["canonical_url"])}">','<meta name="twitter:card" content="summary">']
  lines += [f'<meta property="og:locale:alternate" content="{e(x["locale"])}">' for x in pair if x["locale"]!=p["locale"]]
  lines += [f'<link rel="alternate" hreflang="{e(k)}" href="{e(v)}">' for k,v in alt.items()]
  token=cfg["site"].get("google_site_verification","").strip()
