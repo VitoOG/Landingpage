@@ -1,0 +1,28 @@
+{
+  "site": {
+    "base_url": "https://vitoog.github.io/Landingpage/",
+    "google_site_verification": "",
+    "pages": [
+      {"path":"index.html","canonical_url":"https://vitoog.github.io/Landingpage/","language":"en","locale":"en_US","translation_group":"home","schema_type":"WebPage","title":"Viktors Simonenko | Systems Architect & Integration Engineer","description":"Independent systems architect and integration engineer in Latvia. Cyber-physical systems, embedded and edge infrastructure, industrial integration, and CEA / AgTech R&D."},
+      {"path":"ru/index.html","canonical_url":"https://vitoog.github.io/Landingpage/ru/","language":"ru","locale":"ru_RU","translation_group":"home","schema_type":"WebPage","title":"Виктор Симоненко | Системный архитектор и инженер интеграции","description":"Независимый системный архитектор и инженер интеграции в Латвии. Киберфизические системы, embedded и edge-инфраструктура, промышленные системы и R&D в CEA / AgTech."},
+      {"path":"services/index.html","canonical_url":"https://vitoog.github.io/Landingpage/services/","language":"en","locale":"en_US","translation_group":"services","schema_type":"CollectionPage","title":"Engineering Services | Systems Integration — Viktors Simonenko","description":"Scoped engineering services for systems architecture, embedded and edge integration, industrial systems, security reviews, and CEA / AgTech R&D."},
+      {"path":"ru/services/index.html","canonical_url":"https://vitoog.github.io/Landingpage/ru/services/","language":"ru","locale":"ru_RU","translation_group":"services","schema_type":"CollectionPage","title":"Инженерные услуги и системная интеграция — Виктор Симоненко","description":"Инженерные услуги с определённым объёмом работ: системная архитектура, embedded и edge-интеграция, промышленные системы, аудит безопасности и R&D в CEA / AgTech."}
+    ]
+  },
+  "person": {
+    "name":"Viktors Simonenko",
+    "alternate_name":["Виктор Симоненко","VitoOG"],
+    "job_title":"Systems Architect & Integration Engineer",
+    "description":"Independent systems architect and integration engineer working across cyber-physical systems, embedded and edge computing, OT/IT integration, industrial systems, CEA / AgTech R&D, and reliability engineering.",
+    "same_as":["https://github.com/VitoOG","https://www.linkedin.com/in/viktors-simonenko"],
+    "knows_about":["Cyber-physical systems engineering","Systems architecture and integration","Embedded systems and firmware","Edge computing and local-first infrastructure","Operational technology and information technology integration","Industrial automation and data integration","Deterministic control architecture","Infrastructure security and DevSecOps","Controlled-environment agriculture","Reliability, fault isolation, and recovery engineering"]
+  },
+  "organization": {
+    "name":"Golden Greens Crop",
+    "legal_name":"SIA \"Golden Greens Crop\"",
+    "founding_date":"2026-07-31",
+    "registration_number":"40203766342",
+    "description":"A Latvia-registered R&D company established to develop and validate cyber-physical systems.",
+    "same_as":["https://www.firmas.lv/lv/uznemumi/golden-greens-crop/40203766342","https://company.lursoft.lv/lv/golden-greens-crop"]
+  }
+}
