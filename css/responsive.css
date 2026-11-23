@@ -108,3 +108,244 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+
+/*
+ * Mobile readability pass.
+ * Keep the desktop art direction; make body copy and controls usable
+ * at phone widths without changing content, routes or catalogue data.
+ */
+@media (max-width: 760px) {
+  body {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: .09em;
+  }
+
+  .hero h1 {
+    line-height: 1.04;
+  }
+
+  .hero-role {
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .hero-lead,
+  .section-summary,
+  .contact-inner > div:first-child > p:last-child {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .scope-item p,
+  .principles-grid p,
+  .service-content p,
+  .diagnostic-strip p,
+  .method-steps p,
+  .work-card > p:not(.work-subtitle),
+  .work-evidence p,
+  .catalog-support p:not(.eyebrow) {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .service-meta,
+  .work-card-top {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px 12px;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: .06em;
+  }
+
+  .deliverables h4,
+  .work-evidence strong {
+    font-size: 11px;
+  }
+
+  .deliverables li {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .diagnostic-label {
+    font-size: 10px;
+  }
+
+  .diagnostic-strip strong {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .work-subtitle {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .maturity {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .support-card h3 {
+    font-size: 13px;
+  }
+
+  .support-card p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .footer-inner {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .button,
+  .text-link {
+    font-size: 14px;
+  }
+
+  .hero-tags span {
+    font-size: 10px;
+  }
+
+  .visual-topline,
+  .visual-caption {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .node-index {
+    font-size: 11px;
+  }
+
+  .system-node strong {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .system-node small {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .advisory-label {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .advisory-node p,
+  .advisory-node small {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .advisory-rule {
+    font-size: 10px;
+  }
+
+  /* Service catalogue: larger copy, labels and touch targets. */
+  .catalog-section .catalog-search-wrap input {
+    min-height: 54px;
+    font-size: 16px;
+  }
+
+  .catalog-filters .catalog-filter {
+    min-height: 42px;
+    padding: 8px 14px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .catalog-count {
+    font-size: 12px;
+  }
+
+  .catalog-card .catalog-card-meta .catalog-id {
+    font-size: 10px;
+  }
+
+  .catalog-card .catalog-card-meta .catalog-category {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .catalog-card h2 {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+
+  .catalog-card .catalog-problem {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .catalog-card .catalog-deliverables {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .catalog-card .catalog-billing {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .catalog-card .catalog-details {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .offer-dialog .dialog-field strong {
+    font-size: 11px;
+  }
+
+  .offer-dialog .dialog-field p {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .catalog-support h2 {
+    font-size: 22px;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-heading h2,
+  .contact-inner h2 {
+    line-height: 1.08;
+  }
+
+  .service-card {
+    padding: 20px 18px;
+  }
+
+  .work-card {
+    padding: 20px;
+  }
+
+  .offer-dialog {
+    padding: 20px 18px;
+  }
+
+  .dialog-close {
+    min-width: 42px;
+    min-height: 42px;
+  }
+
+  .primary-navigation .language-switch a {
+    min-width: 40px;
+    min-height: 40px;
+    justify-content: center;
+    font-size: 12px;
+  }
+}
