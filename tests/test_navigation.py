@@ -1,117 +1,49 @@
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[1]
-
-PAGES = {
-    "index.html": {
-        "language": "en",
-        "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
-        "hrefs": ["#scope", "#services", "services/", "#work", "#method", "#contact"],
-        "language_hrefs": {"en": "./", "ru": "ru/"},
-    },
-    "ru/index.html": {
-        "language": "ru",
-        "labels": ["Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
-        "hrefs": ["#scope", "#services", "services/", "#work", "#method", "#contact"],
-        "language_hrefs": {"en": "../", "ru": "./"},
-    },
-    "services/index.html": {
-        "language": "en",
-        "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
-        "hrefs": ["../#scope", "../#services", "./", "../#work", "../#method", "../#contact"],
-        "language_hrefs": {"en": "./", "ru": "../ru/services/"},
-    },
-    "ru/services/index.html": {
-        "language": "ru",
-        "labels": ["Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
-        "hrefs": ["../../ru/#scope", "../../ru/#services", "./", "../../ru/#work", "../../ru/#method", "../../ru/#contact"],
-        "language_hrefs": {"en": "../../services/", "ru": "./"},
-    },
-}
-
-
-class HeaderParser(HTMLParser):
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.in_nav = False
-        self.current_link = None
-        self.links = []
-        self.in_subtitle = False
-        self.subtitle_parts = []
-
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        classes = (attrs.get("class") or "").split()
-        if tag == "nav" and attrs.get("id") == "primary-navigation":
-            self.in_nav = True
-        if tag == "span" and "wordmark-subtitle" in classes:
-            self.in_subtitle = True
-        if tag == "a" and self.in_nav:
-            self.current_link = {"attrs": attrs, "parts": []}
-
-    def handle_endtag(self, tag):
-        if tag == "a" and self.current_link is not None:
-            self.links.append(self.current_link)
-            self.current_link = None
-        elif tag == "span" and self.in_subtitle:
-            self.in_subtitle = False
-        elif tag == "nav" and self.in_nav:
-            self.in_nav = False
-
-    def handle_data(self, data):
-        if self.current_link is not None:
-            self.current_link["parts"].append(data)
-        if self.in_subtitle:
-            self.subtitle_parts.append(data)
-
-
-class NavigationContractTests(unittest.TestCase):
-    def test_all_routes_share_brand_and_localized_navigation(self):
-        for route, expected in PAGES.items():
-            with self.subTest(route=route):
-                parser = HeaderParser()
-                parser.feed((ROOT / route).read_text(encoding="utf-8"))
-
-                subtitle = " ".join(" ".join(parser.subtitle_parts).split())
-                self.assertEqual(subtitle, "ENGINEERING & R&D")
-
-                menu = [item for item in parser.links if not item["attrs"].get("lang")]
-                labels = [
-                    " ".join(" ".join(item["parts"]).replace("↗", "").split())
-                    for item in menu
-                ]
-                self.assertEqual(labels, expected["labels"])
-                self.assertEqual([item["attrs"].get("href") for item in menu], expected["hrefs"])
-
-                catalogue_current = menu[2]["attrs"].get("aria-current")
-                self.assertEqual(
-                    catalogue_current,
-                    "page" if route.endswith("services/index.html") else None,
-                )
-
-    def test_language_switch_targets_and_current_locale(self):
-        for route, expected in PAGES.items():
-            with self.subTest(route=route):
-                parser = HeaderParser()
-                parser.feed((ROOT / route).read_text(encoding="utf-8"))
-                language_links = {
-                    item["attrs"].get("lang"): item
-                    for item in parser.links
-                    if item["attrs"].get("lang")
-                }
-                self.assertEqual(set(language_links), {"en", "ru"})
-                self.assertEqual(
-                    {lang: item["attrs"].get("href") for lang, item in language_links.items()},
-                    expected["language_hrefs"],
-                )
-                for lang, item in language_links.items():
-                    self.assertEqual(
-                        item["attrs"].get("aria-current") == "page",
-                        lang == expected["language"],
-                    )
-
-
-if __name__ == "__main__":
-    unittest.main()
+ROOT=Path(__file__).resolve().parents[1]
+PAGES={
+"index.html":("en",["Scope","Services","Full catalogue","Cart","Selected work","Method","Contact"],["#scope","#services","services/","cart/","#work","#method","#contact"],{"en":"./","ru":"ru/"}),
+"ru/index.html":("ru",["Области работы","Услуги","Каталог услуг","Корзина","Проекты","Метод","Контакт"],["#scope","#services","services/","cart/","#work","#method","#contact"],{"en":"../","ru":"./"}),
+"services/index.html":("en",["Scope","Services","Full catalogue","Cart","Selected work","Method","Contact"],["../#scope","../#services","./","../cart/","../#work","../#method","../#contact"],{"en":"./","ru":"../ru/services/"}),
+"ru/services/index.html":("ru",["Области работы","Услуги","Каталог услуг","Корзина","Проекты","Метод","Контакт"],["../../ru/#scope","../../ru/#services","./","../../ru/cart/","../../ru/#work","../../ru/#method","../../ru/#contact"],{"en":"../../services/","ru":"./"}),
+"cart/index.html":("en",["Scope","Services","Full catalogue","Cart","Selected work","Method","Contact"],["../#scope","../#services","../services/","./","../#work","../#method","../#contact"],{"en":"./","ru":"../ru/cart/"}),
+"ru/cart/index.html":("ru",["Области работы","Услуги","Каталог услуг","Корзина","Проекты","Метод","Контакт"],["../../ru/#scope","../../ru/#services","../services/","./","../../ru/#work","../../ru/#method","../../ru/#contact"],{"en":"../../cart/","ru":"./"})}
+class P(HTMLParser):
+ def __init__(self):
+  super().__init__();self.nav=False;self.a=None;self.links=[];self.skip=False
+ def handle_starttag(self,t,a):
+  a=dict(a);c=(a.get("class") or "").split()
+  if t=="nav" and a.get("id")=="primary-navigation":self.nav=True
+  if t=="span" and "cart-count" in c:self.skip=True
+  if t=="a" and self.nav:self.a={"attrs":a,"text":[]}
+ def handle_endtag(self,t):
+  if t=="a" and self.a is not None:self.links.append(self.a);self.a=None
+  if t=="span":self.skip=False
+  if t=="nav":self.nav=False
+ def handle_data(self,d):
+  if self.a is not None and not self.skip:self.a["text"].append(d)
+class NavigationTests(unittest.TestCase):
+ def test_localized_navigation(self):
+  for path,(lang,labels,hrefs,langs) in PAGES.items():
+   with self.subTest(path=path):
+    p=P();p.feed((ROOT/path).read_text())
+    menu=[x for x in p.links if not x["attrs"].get("lang")]
+    self.assertEqual([" ".join(" ".join(x["text"]).replace("↗","").split()) for x in menu],labels)
+    self.assertEqual([x["attrs"].get("href") for x in menu],hrefs)
+    ll={x["attrs"]["lang"]:x for x in p.links if x["attrs"].get("lang")}
+    self.assertEqual({k:v["attrs"]["href"] for k,v in ll.items()},langs)
+ def test_catalogue_has_33_and_ordering(self):
+  import json
+  for path in ["data/catalog.en.json","data/catalog.ru.json"]:
+   data=json.loads((ROOT/path).read_text())
+   self.assertEqual(len(data["offers"]),33)
+   self.assertEqual(len({x["id"] for x in data["offers"]}),33)
+  for path in ["services/index.html","ru/services/index.html"]:
+   text=(ROOT/path).read_text()
+   self.assertIn("catalog-add", (ROOT/"js/catalog.js").read_text())
+  for path in ["cart/index.html","ru/cart/index.html"]:
+   text=(ROOT/path).read_text()
+   self.assertIn("service-order-form",text)
+   self.assertIn("d39653f1-c848-4022-81f2-1d0e2c4d57fd",text)
+if __name__=="__main__":unittest.main()

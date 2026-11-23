@@ -19,7 +19,7 @@
       problem: "Problem addressed", deliverables: "Deliverables",
       scope: "Scope and exclusions", recurring: "Ongoing support",
       billing: "Billing model", request: "Request a proposal ↗",
-      priceNote: "Indicative price. Final scope and price are agreed before work begins."
+      priceNote: "Indicative price. Final scope and price are agreed before work begins.", add: "Add to request"
     },
     ru: {
       all: "Все направления", results: n => `Показано ${n} из 33 предложений`,
@@ -28,7 +28,7 @@
       problem: "Решаемая проблема", deliverables: "Результат работы",
       scope: "Объём и исключения", recurring: "Сопровождение",
       billing: "Модель оплаты", request: "Запросить предложение ↗",
-      priceNote: "Ориентировочная цена. Итоговый объём и стоимость согласуются до начала работы."
+      priceNote: "Ориентировочная цена. Итоговый объём и стоимость согласуются до начала работы.", add: "Добавить в заявку"
     }
   }[lang];
 
@@ -66,13 +66,10 @@
 
     dialogContent.append(make("p", "catalog-note", ui.priceNote));
 
-    const link = make("a", "button button-primary dialog-action", ui.request);
-    const subject = encodeURIComponent(`${offer.id} — ${offer.name}`);
-    const body = encodeURIComponent(
-      `${offer.name}\n\nCompany / project:\nTask:\nExpected result:\nTimeframe:\nBudget:\n`
-    );
-    link.href = `mailto:viksim1221@gmail.com?subject=${subject}&body=${body}`;
-    dialogContent.append(link);
+    const add = make("button", "button button-primary dialog-action catalog-add", ui.add);
+    add.type = "button"; add.dataset.addOffer = offer.id;
+    dialogContent.append(add);
+    window.GGCOrderCart?.syncButtons();
 
     dialog.showModal();
   }
@@ -139,9 +136,13 @@
       const details = make("button", "catalog-details", ui.detail);
       details.type = "button";
       details.addEventListener("click", () => showDetails(offer));
-      card.append(details);
+      const add = make("button", "button button-primary catalog-add", ui.add);
+      add.type = "button"; add.dataset.addOffer = offer.id;
+      const actions = make("div", "catalog-card-actions"); actions.append(details, add);
+      card.append(actions);
       grid.append(card);
     }
+    window.GGCOrderCart?.syncButtons();
   }
 
   async function init() {

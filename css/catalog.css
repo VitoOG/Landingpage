@@ -89,3 +89,5 @@
   .catalog-support-inner { align-items: flex-start; flex-direction: column; gap: 16px; }
   .catalog-support-inner .button { width: auto; max-width: 100%; }
 }
+
+.catalog-card-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:17px}.catalog-card-actions .catalog-details{margin:0}.catalog-add{cursor:pointer}.catalog-add.is-added{border-color:var(--color-border-strong);background:rgb(185 213 142 / 9%);color:var(--color-accent-strong)}.catalog-card-actions .catalog-add{min-height:38px;padding:8px 13px;font-size:10px}

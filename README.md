@@ -1,77 +1,41 @@
 # Viktors Simonenko — Bilingual Landing Page
 
-A static, two-language professional landing page for a Systems Architect & Integrator.
+Static bilingual professional website and engineering service catalogue.
 
-## Languages and routes
+## Routes
+- English home: `/`
+- Russian home: `/ru/`
+- English catalogue: `/services/`
+- Russian catalogue: `/ru/services/`
+- English request cart: `/cart/`
+- Russian request cart: `/ru/cart/`
 
-- English: `/` (`index.html`)
-- Russian: `/ru/` (`ru/index.html`)
-- The visible `EN / RU` switch links directly between the two static pages.
-- Each page declares its language with `lang`, localized title and metadata, and reciprocal `hreflang` links.
+## Service request flow
+The catalogue contains 33 offers in bilingual JSON data files. Visitors add unique service IDs to a browser-local request cart. Cart state is stored in versioned localStorage and persists across pages and refreshes. The order form sends the selected service list and contact details to Web3Forms.
 
-## Architecture
+This is an enquiry/request workflow, not checkout, payment processing, a binding order confirmation or automatic invoicing. Price ranges are itemized; no combined payable total is calculated because offers use different billing models (fixed fee, milestones, recurring monthly retainers).
 
-- Semantic HTML5
-- Modular CSS (`tokens`, `base`, `layout`, `components`, `responsive`)
-- Small vanilla JavaScript module for mobile navigation and the footer year
-- No build system, package manager, framework, backend, analytics or third-party runtime dependency
-- System font stack; no remote font service
+The Web3Forms Access Key is a public client-side form identifier. Provider success is shown only when the API responds with `success: true`; fields and cart remain on failures. Automated tests mock the provider and never send email.
 
 ## Local preview
-
-From this directory:
-
 ```bash
-python -m http.server 8081 --bind 127.0.0.1
+python3 -m http.server 8081 --bind 127.0.0.1
+```
+Open `http://127.0.0.1:8081/`, `/ru/`, `/services/`, `/ru/services/`, `/cart/` or `/ru/cart/`.
+
+## Validation
+```bash
+python -m unittest discover -s tests -v
+node --check js/order-core.js
+node --check js/order-cart.js
+node --check js/order-form.js
+node --check js/catalog.js
+node --test tests/order-core.test.cjs
 ```
 
-Open:
-
-- `http://127.0.0.1:8081/` — English
-- `http://127.0.0.1:8081/ru/` — Russian
-
-## Content and evidence policy
-
-The two language pages describe the same offers, initiatives and evidence boundaries. The personal engineering practice remains distinct from Golden Greens Crop, ERICA OS and the Sovereign Engineering Platform. The R&D cards describe ongoing initiatives; they do not claim a commissioned production greenhouse, certified system, production-ready ERICA OS, or completed enterprise deployment.
-
-The €400 Device-to-Service Integration Diagnostic is described as a bounded, read-only entry engagement: one defined integration path, up to six hours, delivered within three working days after agreed inputs. Production changes, hardware commissioning and guaranteed fixes are excluded. Confirm the public price, tax wording, service scope and delivery window before publication.
-
-## Before publication
-
-1. Confirm the public €400 diagnostic price, tax wording, service scope and delivery window.
-2. Verify the Golden Greens public URL and all contact/profile destinations.
-3. Review project maturity statements against the latest source evidence.
-4. Add the canonical Golden Greens SVG only where it supports the company/project identity. Do not use it as the personal brand mark.
-5. Test both language routes, mobile navigation, keyboard focus, links, and narrow/wide viewport sizes.
-6. Review repository diff before merging or publishing.
-
-## Directory structure
-
-```text
-.
-├── index.html           # English
-├── ru/
-│   └── index.html       # Russian
-├── README.md
-├── css/
-│   ├── tokens.css
-│   ├── base.css
-│   ├── layout.css
-│   ├── components.css
-│   └── responsive.css
-├── js/
-│   └── main.js
-└── assets/
-    ├── brand/
-    └── images/
-```
-
-
-## Service catalogue
-
-- English: `/services/`
-- Russian: `/ru/services/`
-- Public data: `data/catalog.en.json`, `data/catalog.ru.json`
-- Catalogue UI: `js/catalog.js`, `css/catalog.css`
-- Internal sales strategy fields (`score`, `pilot`, `sales_angle`) are excluded from public data.
-- Listed prices are indicative and require commercial confirmation before engagement.
+## Production notes
+- The current provider integration uses the Golden Greens Crop public Web3Forms key.
+- If Web3Forms Pro domain restriction is enabled, configure the hostname `vitoog.github.io`; do not include protocol or path.
+- The current form includes the legacy `botcheck` honeypot as a supplementary field. Current Web3Forms documentation marks honeypot protection as deprecated and recommends CAPTCHA protection.
+- Review and publish a privacy notice before collecting customer personal data.
+- A successful provider response confirms receipt by Web3Forms, not delivery to a recipient inbox, a signed agreement or payment.

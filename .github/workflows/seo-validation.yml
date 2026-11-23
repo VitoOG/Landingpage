@@ -1,9 +1,9 @@
-name: SEO integrity
+name: SEO and service request validation
 on:
   pull_request:
     branches: [feature/service-catalog-integration]
   push:
-    branches: [feature/seo-entity-discovery-integration]
+    branches: [feature/service-request-cart]
 permissions:
   contents: read
 jobs:
@@ -14,6 +14,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - run: python scripts/verify_seo.py --site-root . --config seo/site-config.json
       - run: python -m unittest discover -s tests -v
+      - run: node --check js/order-core.js
+      - run: node --check js/order-cart.js
+      - run: node --check js/order-form.js
+      - run: node --check js/catalog.js
+      - run: node --test tests/order-core.test.cjs
       - run: git diff --check
