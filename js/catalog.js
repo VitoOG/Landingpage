@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const lang = document.body.dataset.lang;
+  const lang = document.body.dataset.lang || document.documentElement.lang || "en";
   const source = document.body.dataset.catalogUrl;
   const grid = document.querySelector("#catalog-grid");
   const filters = document.querySelector("#catalog-filters");
@@ -50,6 +50,13 @@
     }
   }[lang];
 
+  if (!ui) {
+    error.hidden = false;
+    error.textContent = `Unsupported catalogue language: ${lang}`;
+    count.textContent = "";
+    return;
+  }
+
   const make = (tag, className, value) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -86,9 +93,13 @@
 
     const link = make("a", "button button-primary dialog-action", ui.request);
     const subject = encodeURIComponent(`${offer.id} — ${offer.name}`);
-    const body = encodeURIComponent(
-      `${offer.name}\n\nCompany / project:\nTask:\nExpected result:\nTimeframe:\nBudget:\n`
-    );
+    const inquiryFields = {
+      en: ["Company / project:", "Task:", "Expected result:", "Timeframe:", "Budget:"],
+      ru: ["Компания / проект:", "Задача:", "Ожидаемый результат:", "Сроки:", "Бюджет:"],
+      es: ["Empresa / proyecto:", "Tarea:", "Resultado esperado:", "Plazo:", "Presupuesto:"],
+      fr: ["Entreprise / projet :", "Mission :", "Résultat attendu :", "Échéance :", "Budget :"]
+    }[lang];
+    const body = encodeURIComponent(`${offer.name}\\n\\n${inquiryFields.join("\\n")}\\n`);
     link.href = `mailto:viksim1221@gmail.com?subject=${subject}&body=${body}`;
     dialogContent.append(link);
 
