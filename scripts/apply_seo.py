@@ -21,7 +21,7 @@ def validate(cfg,root):
   if p["path"] in paths or p["canonical_url"] in urls: raise ValueError("duplicate path or canonical")
   paths.add(p["path"]); urls.add(p["canonical_url"])
   if not p["canonical_url"].startswith(base) or urlparse(p["canonical_url"]).scheme!="https": raise ValueError("canonical outside base_url")
-  if p["language"] not in ("en","ru","es","lv"): raise ValueError("unsupported language")
+  if p["language"] not in ("en","ru","es","fr","lv"): raise ValueError("unsupported language")
   if p["schema_type"] not in ("WebPage","CollectionPage","AboutPage"): raise ValueError("invalid schema_type")
   groups.setdefault(p["translation_group"],[]).append(p)
  for g,items in groups.items():
