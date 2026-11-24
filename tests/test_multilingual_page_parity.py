@@ -25,7 +25,9 @@ class MultilingualPageParityTests(unittest.TestCase):
                 self.assertEqual(html.count('class="service-card'), 3)
                 self.assertEqual(html.count('<li><span class="step-number">'), 5)
                 self.assertEqual(html.count('class="work-card"'), 4)
-                self.assertEqual(html.count('<div><h3>'), 6)
+                principles_start = html.index('<div class="principles-grid">')
+                principles_html = html[principles_start:html.index("</section>", principles_start)]
+                self.assertEqual(principles_html.count("<h3>"), 6)
                 self.assertIn('id="profile"', html)
                 self.assertIn('id="principles"', html)
 
