@@ -75,7 +75,7 @@
     {
       "id": "SE-07",
       "category": "IA et données",
-      "name": "Pipeline d’intelligence documentaire",
+      "name": "Traitement intelligent de documents",
       "price": "€1,200–3,500",
       "billing": "Forfait fixe",
       "buyer": "Entreprises traitant formulaires, spécifications, rapports de maintenance ou documents fournisseurs",
@@ -99,7 +99,7 @@
     {
       "id": "SE-09",
       "category": "Edge et infrastructure",
-      "name": "Audit de santé Linux / Edge",
+      "name": "Audit de l’état opérationnel Linux / Edge",
       "price": "€290–650",
       "billing": "Forfait fixe",
       "buyer": "Petites entreprises disposant de serveurs Linux, NAS, passerelles ou applications sur site",
@@ -111,7 +111,7 @@
     {
       "id": "SE-10",
       "category": "Edge et infrastructure",
-      "name": "Déploiement Edge auto-hébergé",
+      "name": "Déploiement d’une infrastructure Edge auto-hébergée",
       "price": "€850–2,400",
       "billing": "Mise en œuvre",
       "buyer": "PME ayant besoin d’une passerelle locale, d’une application, d’une base de données ou d’un service interne",
@@ -123,7 +123,7 @@
     {
       "id": "SE-11",
       "category": "Edge et infrastructure",
-      "name": "Socle de supervision et de gestion des incidents",
+      "name": "Mise en place de la supervision et de la gestion des incidents",
       "price": "€750–1,800",
       "billing": "Mise en place + supervision mensuelle",
       "buyer": "PME disposant de serveurs, d’équipements Edge ou de petites flottes OT/IoT",
@@ -237,13 +237,13 @@
       "buyer": "PME, intégrateurs, équipes R&D et sous-traitants",
       "problem": "La connaissance du système reste dans la mémoire des personnes, d’anciens schémas ou des documents incohérents.",
       "deliverables": "Contexte système ; diagrammes d’interfaces et de flux de données ; guide de déploiement et d’exploitation ; hypothèses ; risques ; journal des changements.",
-      "scope": "Une frontière système et des sources convenues.",
+      "scope": "Un périmètre système et des sources documentaires convenus.",
       "recurring": "Mise à jour documentaire : €100–300/mois"
     },
     {
       "id": "SE-21",
       "category": "CEA et AgTech",
-      "name": "Schéma d’architecture d’un système CEA",
+      "name": "Architecture d’un système d’agriculture en environnement contrôlé (CEA)",
       "price": "€900–2,500",
       "billing": "Forfait fixe",
       "buyer": "Producteurs indoor, exploitants de serres, investisseurs et intégrateurs d’équipements",
@@ -303,7 +303,7 @@
     {
       "id": "SE-26",
       "category": "CEA et AgTech",
-      "name": "Aide à la décision pour l’irrigation et la fertigation",
+      "name": "Système d’aide à la décision pour l’irrigation et la fertigation",
       "price": "€1,800–5,000",
       "billing": "Conception + prototype",
       "buyer": "Producteurs CEA et équipes R&D agricoles",
@@ -327,7 +327,7 @@
     {
       "id": "SE-28",
       "category": "CEA et AgTech",
-      "name": "Analyse de l’énergie et de l’eau d’une exploitation",
+      "name": "Analyse intégrée des consommations d’énergie et d’eau d’une exploitation",
       "price": "€1,500–4,000",
       "billing": "Mise en œuvre + supervision",
       "buyer": "Serres, fermes indoor et petits producteurs alimentaires",
@@ -339,7 +339,7 @@
     {
       "id": "SE-29",
       "category": "R&D et ingénierie",
-      "name": "Sprint de faisabilité technique",
+      "name": "Étude intensive de faisabilité technique",
       "price": "€950–2,500",
       "billing": "Forfait fixe",
       "buyer": "Fondateurs, PME et équipes R&D ayant un concept technique encore flou",
@@ -351,7 +351,7 @@
     {
       "id": "SE-30",
       "category": "R&D et ingénierie",
-      "name": "Sprint d’intégration de prototype",
+      "name": "Cycle intensif d’intégration de prototype",
       "price": "€1,500–6,000",
       "billing": "Par jalons",
       "buyer": "Startups hardware, intégrateurs, spin-offs universitaires et équipes R&D",
