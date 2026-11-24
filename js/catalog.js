@@ -29,6 +29,24 @@
       scope: "Объём и исключения", recurring: "Сопровождение",
       billing: "Модель оплаты", request: "Запросить предложение ↗",
       priceNote: "Ориентировочная цена. Итоговый объём и стоимость согласуются до начала работы."
+    },
+    es: {
+      all: "Todas las categorías", results: n => `${n} de 33 servicios`,
+      empty: "No hay servicios que coincidan. Pruebe otra búsqueda o categoría.",
+      detail: "Ver alcance y detalles ↗", buyer: "Dirigido a",
+      problem: "Problema que aborda", deliverables: "Entregables",
+      scope: "Alcance y exclusiones", recurring: "Soporte continuo",
+      billing: "Modalidad de contratación", request: "Solicitar propuesta ↗",
+      priceNote: "Precio orientativo. El alcance y el precio definitivos se acuerdan antes de comenzar."
+    },
+    fr: {
+      all: "Toutes les catégories", results: n => `${n} offres sur 33`,
+      empty: "Aucune offre ne correspond. Essayez une autre recherche ou catégorie.",
+      detail: "Voir le périmètre et les détails ↗", buyer: "Public concerné",
+      problem: "Problème traité", deliverables: "Livrables",
+      scope: "Périmètre et exclusions", recurring: "Assistance continue",
+      billing: "Modalité de facturation", request: "Demander une proposition ↗",
+      priceNote: "Prix indicatif. Le périmètre et le prix définitifs sont convenus avant le début des travaux."
     }
   }[lang];
 
