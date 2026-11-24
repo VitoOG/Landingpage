@@ -13,6 +13,8 @@ ROUTES = {
     "fr/index.html": "fr",
     "services/index.html": "en",
     "ru/services/index.html": "ru",
+    "es/services/index.html": "es",
+    "fr/services/index.html": "fr",
 }
 EXPECTED_FIELDS = {
     "id", "category", "name", "price", "billing",
@@ -116,22 +118,22 @@ class RepositoryIntegrityTests(unittest.TestCase):
             self.assertIn("Sovereign Engineering Platform", html, route)
             self.assertIn("https://buymeacoffee.com/goldengreens", html, route)
 
-    def test_bilingual_catalogue_has_matching_33_offer_schema(self):
-        with (ROOT / "data/catalog.en.json").open(encoding="utf-8") as file:
-            english = json.load(file)["offers"]
-        with (ROOT / "data/catalog.ru.json").open(encoding="utf-8") as file:
-            russian = json.load(file)["offers"]
+    def test_four_language_catalogues_have_matching_33_offer_schema(self):
+        catalogues = {}
+        for language in ("en", "ru", "es", "fr"):
+            path = ROOT / ("data/catalog." + language + ".json")
+            with path.open(encoding="utf-8") as file:
+                catalogues[language] = json.load(file)["offers"]
 
         expected_ids = [f"SE-{number:02d}" for number in range(1, 34)]
-        self.assertEqual(len(english), 33)
-        self.assertEqual(len(russian), 33)
-        self.assertEqual([item["id"] for item in english], expected_ids)
-        self.assertEqual([item["id"] for item in russian], expected_ids)
-
-        for language, offers in (("en", english), ("ru", russian)):
-            for offer in offers:
+        english = catalogues["en"]
+        for language, offers in catalogues.items():
+            self.assertEqual(len(offers), 33, language)
+            self.assertEqual([item["id"] for item in offers], expected_ids, language)
+            for index, offer in enumerate(offers):
                 with self.subTest(language=language, offer=offer.get("id")):
                     self.assertEqual(set(offer), EXPECTED_FIELDS)
+                    self.assertEqual(offer["price"], english[index]["price"])
                     for field in EXPECTED_FIELDS:
                         self.assertIsInstance(offer[field], str, field)
                         self.assertTrue(offer[field].strip(), field)

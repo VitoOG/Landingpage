@@ -9,10 +9,10 @@ class SeoTests(unittest.TestCase):
    f=self.root/p["path"];f.parent.mkdir(parents=True,exist_ok=True);f.write_text(f'<html lang="{p["language"]}"><head><title>Old</title></head><body>Content</body></html>')
   subprocess.run([sys.executable,str(ROOT/"scripts/apply_seo.py"),"--site-root",str(self.root),"--config",str(self.cfg),"--no-backup"],check=True)
  def tearDown(self):self.tmp.cleanup()
- def test_six_pages_and_sitemap(self):
+ def test_all_configured_pages_and_sitemap(self):
   r=subprocess.run([sys.executable,str(ROOT/"scripts/verify_seo.py"),"--site-root",str(self.root),"--config",str(self.cfg)],capture_output=True,text=True)
   self.assertEqual(r.returncode,0,r.stdout+r.stderr)
-  self.assertEqual(Path(self.root/"sitemap.xml").read_text().count("<url>"),6)
+  self.assertEqual(Path(self.root/"sitemap.xml").read_text().count("<url>"),len(json.loads(self.cfg.read_text(encoding="utf-8"))["site"]["pages"]))
  def test_idempotent(self):
   before={str(p.relative_to(self.root)):p.read_bytes() for p in self.root.rglob("*") if p.is_file() and p!=self.cfg}
   subprocess.run([sys.executable,str(ROOT/"scripts/apply_seo.py"),"--site-root",str(self.root),"--config",str(self.cfg),"--no-backup"],check=True)
