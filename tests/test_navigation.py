@@ -41,6 +41,12 @@ PAGES = {
         "hrefs": ["../../ru/#scope", "../../ru/#services", "./", "../../ru/#work", "../../ru/#method", "../../ru/#contact"],
         "language_hrefs": {"en": "../../services/", "ru": "./", "es": "../../es/", "fr": "../../fr/"},
     },
+    "es/services/index.html": {
+        "language": "es",
+        "labels": ["Áreas", "Servicios", "Catálogo", "Proyectos", "Método", "Contacto"],
+        "hrefs": ["../#scope", "../#services", "./", "../#work", "../#method", "../#contact"],
+        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "./", "fr": "../../fr/"},
+    },
 }
 
 
