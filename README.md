@@ -1,6 +1,6 @@
-# Viktors Simonenko — Multilingual Engineering Website
+# Golden Greens Crop — Multilingual Engineering Website
 
-A static multilingual professional website for Viktors Simonenko, Systems Architect & Integration Engineer, and the engineering services offered through SIA “Golden Greens Crop”.
+A static multilingual engineering and R&D website for the Golden Greens Crop brand, founded by Viktors Simonenko, Systems Architect & Integration Engineer. Commercial engineering engagements are offered through SIA “Golden Greens Crop”.
 
 ## Public routes
 
@@ -12,6 +12,8 @@ A static multilingual professional website for Viktors Simonenko, Systems Archit
 | `/fr/` | French personal profile | `fr/index.html` |
 | `/services/` | English service catalogue | `services/index.html` |
 | `/ru/services/` | Russian service catalogue | `ru/services/index.html` |
+| `/es/services/` | Spanish service catalogue | `es/services/index.html` |
+| `/fr/services/` | French service catalogue | `fr/services/index.html` |
 
 Each route is a separately maintained static HTML page. The Spanish `/es/` and French `/fr/` routes are concise personal profiles focused on professional background and selected work; it intentionally does not reproduce the EN/RU service catalogue. Language switches lead to the closest equivalent profile.
 
@@ -21,14 +23,14 @@ The website distinguishes the independent engineering practice of **Viktors Simo
 
 Project descriptions do not claim a commissioned production greenhouse, certified system, production-ready ERICA OS, or completed enterprise deployment. Catalogue prices are indicative; final scope, responsibilities, acceptance criteria and price are agreed before engagement.
 
-The supplied SVG in `assets/brand/` is the canonical Golden Greens Crop mark. It is used as a secondary company emblem; it does not replace the personal name as the primary identity.
+The supplied SVG in `assets/brand/` is the canonical Golden Greens Crop brand mark. Golden Greens Crop is the primary visual identity across all language routes; Viktors Simonenko is identified in the professional profile and as the company's founder.
 
 ## Architecture
 
-- **HTML:** six semantic, language-specific static pages.
+- **HTML:** eight semantic, language-specific static pages.
 - **CSS:** shared design tokens, base styles, layout, components, responsive rules, and separate catalogue styling.
 - **JavaScript:** vanilla JavaScript for mobile navigation, footer year, catalogue loading, filtering, search and the offer-details dialog.
-- **Data:** `data/catalog.en.json` and `data/catalog.ru.json`, each containing 33 offers with matching IDs and fields.
+- **Data:** `data/catalog.en.json`, `data/catalog.ru.json`, `data/catalog.es.json` and `data/catalog.fr.json`, each containing 33 offers with matching IDs, fields and source prices.
 - **SEO:** `seo/site-config.json` is the authoritative source for route metadata and person / organization identity. Python scripts generate and validate managed metadata, `robots.txt` and `sitemap.xml`.
 - **Assets:** the supplied SVG brand mark and a reserved location for publication-safe project images.
 

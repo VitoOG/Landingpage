@@ -110,6 +110,22 @@ class RepositoryIntegrityTests(unittest.TestCase):
                     self.assertTrue(catalog_path.is_file(), parser.catalog_url)
                     self.assertEqual(parser.catalog_language, expected_language)
 
+    def test_company_brand_and_favicon_are_consistent_on_all_routes(self):
+        for route in ROUTES:
+            html = (ROOT / route).read_text(encoding="utf-8")
+            with self.subTest(route=route):
+                self.assertIn(
+                    '<span class="wordmark-name">GOLDEN GREENS CROP</span>',
+                    html,
+                )
+                self.assertIn('rel="icon" type="image/svg+xml"', html)
+                self.assertIn("golden-greens-crop-mark.svg", html)
+
+        config = json.loads((ROOT / "seo/site-config.json").read_text(encoding="utf-8"))
+        for page in config["site"]["pages"]:
+            if page["translation_group"] == "home":
+                self.assertTrue(page["title"].startswith("Golden Greens Crop | "))
+
     def test_four_project_cards_and_support_are_present_on_every_profile(self):
         for route in ("index.html", "ru/index.html", "es/index.html", "fr/index.html"):
             html = (ROOT / route).read_text(encoding="utf-8")
