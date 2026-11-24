@@ -108,6 +108,14 @@ class RepositoryIntegrityTests(unittest.TestCase):
                     self.assertTrue(catalog_path.is_file(), parser.catalog_url)
                     self.assertEqual(parser.catalog_language, expected_language)
 
+    def test_four_project_cards_and_support_are_present_on_every_profile(self):
+        for route in ("index.html", "ru/index.html", "es/index.html", "fr/index.html"):
+            html = (ROOT / route).read_text(encoding="utf-8")
+            self.assertEqual(html.count('class="work-card"'), 4, route)
+            self.assertIn("Golden Greens Spatial Product System", html, route)
+            self.assertIn("Sovereign Engineering Platform", html, route)
+            self.assertIn("https://buymeacoffee.com/goldengreens", html, route)
+
     def test_bilingual_catalogue_has_matching_33_offer_schema(self):
         with (ROOT / "data/catalog.en.json").open(encoding="utf-8") as file:
             english = json.load(file)["offers"]
