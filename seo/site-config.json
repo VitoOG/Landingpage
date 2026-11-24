@@ -62,6 +62,26 @@
         "schema_type": "CollectionPage",
         "title": "Инженерные услуги | Golden Greens Crop",
         "description": "Инженерные услуги с определённым объёмом работ: системная архитектура, embedded и edge-интеграция, промышленные системы, аудит безопасности и R&D в CEA / AgTech."
+      },
+      {
+        "path": "es/services/index.html",
+        "canonical_url": "https://vitoog.github.io/Landingpage/es/services/",
+        "language": "es",
+        "locale": "es_ES",
+        "translation_group": "services",
+        "schema_type": "CollectionPage",
+        "title": "Catálogo de servicios de ingeniería | Golden Greens Crop",
+        "description": "33 servicios de ingeniería con entregables, alcance, exclusiones y precios orientativos: IA, Edge, ciberseguridad, CEA, AgTech e I+D."
+      },
+      {
+        "path": "fr/services/index.html",
+        "canonical_url": "https://vitoog.github.io/Landingpage/fr/services/",
+        "language": "fr",
+        "locale": "fr_FR",
+        "translation_group": "services",
+        "schema_type": "CollectionPage",
+        "title": "Catalogue de services d’ingénierie | Golden Greens Crop",
+        "description": "33 prestations d’ingénierie avec livrables, périmètre, exclusions et tarifs indicatifs : IA, Edge, cybersécurité, CEA, AgTech et R&D."
       }
     ]
   },
