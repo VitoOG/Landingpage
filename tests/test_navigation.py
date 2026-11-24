@@ -109,7 +109,7 @@ class NavigationContractTests(unittest.TestCase):
                 self.assertEqual(labels, expected["labels"])
                 self.assertEqual([item["attrs"].get("href") for item in menu], expected["hrefs"])
 
-                catalogue_current = menu[2]["attrs"].get("aria-current")
+                catalogue_current = menu[3]["attrs"].get("aria-current")
                 self.assertEqual(
                     catalogue_current,
                     "page" if route.endswith("services/index.html") else None,
