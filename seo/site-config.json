@@ -34,6 +34,16 @@
         "description": "Ingeniero independiente en Letonia. Arquitectura e integración de sistemas ciberfísicos, electrónica, sistemas embebidos, Linux y edge, automatización e I+D en CEA / AgTech."
       },
       {
+        "path": "fr/index.html",
+        "canonical_url": "https://vitoog.github.io/Landingpage/fr/",
+        "language": "fr",
+        "locale": "fr_FR",
+        "translation_group": "home",
+        "schema_type": "AboutPage",
+        "title": "Viktors Simonenko | Architecture de systèmes et intégration cyberphysique",
+        "description": "Ingénieur indépendant en Lettonie. Architecture et intégration de systèmes cyberphysiques, électronique, systèmes embarqués, Linux et edge, automatisation et R&D en CEA / AgTech."
+      },
+      {
         "path": "services/index.html",
         "canonical_url": "https://vitoog.github.io/Landingpage/services/",
         "language": "en",
