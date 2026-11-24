@@ -26,7 +26,7 @@ PAGES = {
     "fr/index.html": {
         "language": "fr",
         "labels": ["Profil", "Domaines d’intervention", "Catalogue des services", "Projets", "Méthode", "Contact"],
-        "hrefs": ["#profile", "#areas", "../services/", "#projects", "#approach", "#contact"],
+        "hrefs": ["#profile", "#areas", "services/", "#projects", "#approach", "#contact"],
         "language_hrefs": {"en": "../", "ru": "../ru/", "es": "../es/", "fr": "./"},
     },
     "services/index.html": {
