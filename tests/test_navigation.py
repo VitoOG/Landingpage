@@ -33,7 +33,7 @@ PAGES = {
         "language": "en",
         "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
         "hrefs": ["../#scope", "../#services", "./", "../#work", "../#method", "../#contact"],
-        "language_hrefs": {"en": "./", "ru": "../ru/services/", "es": "../es/", "fr": "../fr/"},
+        "language_hrefs": {"en": "./", "ru": "../ru/services/", "es": "../es/services/", "fr": "../fr/services/"},
     },
     "ru/services/index.html": {
         "language": "ru",
