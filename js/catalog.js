@@ -99,7 +99,7 @@
       es: ["Empresa / proyecto:", "Tarea:", "Resultado esperado:", "Plazo:", "Presupuesto:"],
       fr: ["Entreprise / projet :", "Mission :", "Résultat attendu :", "Échéance :", "Budget :"]
     }[lang];
-    const body = encodeURIComponent(`${offer.name}\\n\\n${inquiryFields.join("\\n")}\\n`);
+    const body = encodeURIComponent(`${offer.name}\n\n${inquiryFields.join("\n")}\n`);
     link.href = `mailto:viksim1221@gmail.com?subject=${subject}&body=${body}`;
     dialogContent.append(link);
 

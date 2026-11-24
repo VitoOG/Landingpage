@@ -33,25 +33,25 @@ PAGES = {
         "language": "en",
         "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
         "hrefs": ["../#scope", "../#services", "./", "../#work", "../#method", "../#contact"],
-        "language_hrefs": {"en": "./", "ru": "../ru/services/", "es": "../es/", "fr": "../fr/"},
+        "language_hrefs": {"en": "./", "ru": "../ru/services/", "es": "../es/services/", "fr": "../fr/services/"},
     },
     "ru/services/index.html": {
         "language": "ru",
         "labels": ["Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
         "hrefs": ["../../ru/#scope", "../../ru/#services", "./", "../../ru/#work", "../../ru/#method", "../../ru/#contact"],
-        "language_hrefs": {"en": "../../services/", "ru": "./", "es": "../../es/", "fr": "../../fr/"},
+        "language_hrefs": {"en": "../../services/", "ru": "./", "es": "../../es/services/", "fr": "../../fr/services/"},
     },
     "es/services/index.html": {
         "language": "es",
         "labels": ["Perfil", "Áreas de trabajo", "Catálogo de servicios", "Proyectos", "Cómo trabajo", "Contacto"],
         "hrefs": ["../../es/#profile", "../../es/#areas", "./", "../../es/#projects", "../../es/#approach", "../../es/#contact"],
-        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "../../es/services/", "fr": "../../fr/services/"},
+        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "./", "fr": "../../fr/services/"},
     },
     "fr/services/index.html": {
         "language": "fr",
         "labels": ["Profil", "Domaines d’intervention", "Catalogue des services", "Projets", "Méthode", "Contact"],
         "hrefs": ["../../fr/#profile", "../../fr/#areas", "./", "../../fr/#projects", "../../fr/#approach", "../../fr/#contact"],
-        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "../../es/services/", "fr": "../../fr/services/"},
+        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "../../es/services/", "fr": "./"},
     },
 }
 

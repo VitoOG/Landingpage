@@ -75,7 +75,7 @@
     {
       "id": "SE-07",
       "category": "AI y datos",
-      "name": "Canalización de inteligencia documental",
+      "name": "Procesamiento inteligente de documentos",
       "price": "€1,200–3,500",
       "billing": "Precio fijo",
       "buyer": "Empresas que procesan formularios, especificaciones, informes de mantenimiento o documentos de proveedores",
@@ -99,7 +99,7 @@
     {
       "id": "SE-09",
       "category": "Edge e infraestructura",
-      "name": "Auditoría de Linux y estado de Edge",
+      "name": "Auditoría del estado de Linux y Edge",
       "price": "€290–650",
       "billing": "Precio fijo",
       "buyer": "Pequeñas empresas con servidores Linux, NAS, pasarelas o aplicaciones locales",
@@ -111,7 +111,7 @@
     {
       "id": "SE-10",
       "category": "Edge e infraestructura",
-      "name": "Despliegue Edge autogestionado",
+      "name": "Despliegue de infraestructura Edge autogestionada",
       "price": "€850–2,400",
       "billing": "Implementación",
       "buyer": "Pymes que necesitan una pasarela local, aplicación, base de datos o servicio interno",
@@ -123,7 +123,7 @@
     {
       "id": "SE-11",
       "category": "Edge e infraestructura",
-      "name": "Base de monitorización e incidentes",
+      "name": "Puesta en marcha de monitorización y gestión de incidentes",
       "price": "€750–1,800",
       "billing": "Configuración + monitorización mensual",
       "buyer": "Pymes con servidores, dispositivos Edge o pequeñas flotas OT/IoT",
@@ -231,19 +231,19 @@
     {
       "id": "SE-20",
       "category": "Seguridad y cumplimiento",
-      "name": "Documentación técnica de arquitectura y operaciones",
+      "name": "Documentación técnica de arquitectura y operación",
       "price": "€750–2,500",
       "billing": "Precio fijo",
       "buyer": "Pymes, integradores, equipos de I+D y subcontratistas",
       "problem": "El conocimiento del sistema está en la memoria del personal, diagramas antiguos o documentos incoherentes.",
       "deliverables": "Contexto del sistema; diagramas de interfaces y flujos de datos; guía de despliegue y operación; supuestos; riesgos; registro de cambios.",
-      "scope": "Un límite de sistema y material de referencia acordado.",
+      "scope": "Un ámbito del sistema y un conjunto de fuentes acordados.",
       "recurring": "Mantenimiento documental: €100–300/mes"
     },
     {
       "id": "SE-21",
       "category": "CEA y AgTech",
-      "name": "Esquema de arquitectura de sistemas CEA",
+      "name": "Arquitectura de sistemas para agricultura en ambiente controlado (CEA)",
       "price": "€900–2,500",
       "billing": "Precio fijo",
       "buyer": "Productores de interior, operadores de invernaderos, inversores e integradores de equipos",
@@ -303,7 +303,7 @@
     {
       "id": "SE-26",
       "category": "CEA y AgTech",
-      "name": "Apoyo a decisiones de riego y fertirrigación",
+      "name": "Sistema de apoyo a la decisión para riego y fertirrigación",
       "price": "€1,800–5,000",
       "billing": "Diseño + prototipo",
       "buyer": "Productores CEA y equipos de I+D agrícola",
@@ -327,7 +327,7 @@
     {
       "id": "SE-28",
       "category": "CEA y AgTech",
-      "name": "Inteligencia sobre energía y agua en explotaciones",
+      "name": "Análisis integrado del consumo de energía y agua en explotaciones",
       "price": "€1,500–4,000",
       "billing": "Implementación + monitorización",
       "buyer": "Invernaderos, granjas de interior y pequeños productores alimentarios",
@@ -339,7 +339,7 @@
     {
       "id": "SE-29",
       "category": "I+D e ingeniería",
-      "name": "Sprint de viabilidad técnica",
+      "name": "Estudio intensivo de viabilidad técnica",
       "price": "€950–2,500",
       "billing": "Precio fijo",
       "buyer": "Fundadores, pymes y equipos de I+D con un concepto técnico poco definido",
@@ -351,7 +351,7 @@
     {
       "id": "SE-30",
       "category": "I+D e ingeniería",
-      "name": "Sprint de integración de prototipo",
+      "name": "Ciclo intensivo de integración de prototipos",
       "price": "€1,500–6,000",
       "billing": "Por hitos",
       "buyer": "Startups de hardware, integradores, spin-offs universitarias y equipos de I+D",
