@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 HOME_PAGES = ("index.html", "ru/index.html", "es/index.html", "fr/index.html")
 EXPECTED_SECTIONS = [
-    "profile", "scope", "services", "method", "work", "principles", "contact"
+    "top", "profile", "scope", "services", "method", "work", "principles", "contact"
 ]
 
 
