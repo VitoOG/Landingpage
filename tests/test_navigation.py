@@ -7,50 +7,50 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
     "index.html": {
         "language": "en",
-        "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
-        "hrefs": ["#scope", "#services", "services/", "#work", "#method", "#contact"],
+        "labels": ["Profile", "Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
+        "hrefs": ["#profile", "#scope", "#services", "services/", "#work", "#method", "#contact"],
         "language_hrefs": {"en": "./", "ru": "ru/", "es": "es/", "fr": "fr/"},
     },
     "ru/index.html": {
         "language": "ru",
-        "labels": ["Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
-        "hrefs": ["#scope", "#services", "services/", "#work", "#method", "#contact"],
+        "labels": ["Профиль", "Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
+        "hrefs": ["#profile", "#scope", "#services", "services/", "#work", "#method", "#contact"],
         "language_hrefs": {"en": "../", "ru": "./", "es": "../es/", "fr": "../fr/"},
     },
     "es/index.html": {
         "language": "es",
-        "labels": ["Perfil", "Áreas de trabajo", "Catálogo de servicios", "Proyectos", "Cómo trabajo", "Contacto"],
-        "hrefs": ["#profile", "#areas", "services/", "#projects", "#approach", "#contact"],
+        "labels": ["Perfil", "Áreas de trabajo", "Servicios", "Catálogo completo", "Proyectos seleccionados", "Método", "Contacto"],
+        "hrefs": ["#profile", "#scope", "#services", "services/", "#work", "#method", "#contact"],
         "language_hrefs": {"en": "../", "ru": "../ru/", "es": "./", "fr": "../fr/"},
     },
     "fr/index.html": {
         "language": "fr",
-        "labels": ["Profil", "Domaines d’intervention", "Catalogue des services", "Projets", "Méthode", "Contact"],
-        "hrefs": ["#profile", "#areas", "services/", "#projects", "#approach", "#contact"],
+        "labels": ["Profil", "Domaines d’intervention", "Services", "Catalogue complet", "Projets sélectionnés", "Méthode", "Contact"],
+        "hrefs": ["#profile", "#scope", "#services", "services/", "#work", "#method", "#contact"],
         "language_hrefs": {"en": "../", "ru": "../ru/", "es": "../es/", "fr": "./"},
     },
     "services/index.html": {
         "language": "en",
-        "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
-        "hrefs": ["../#scope", "../#services", "./", "../#work", "../#method", "../#contact"],
+        "labels": ["Profile", "Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
+        "hrefs": ["../#profile", "../#scope", "../#services", "./", "../#work", "../#method", "../#contact"],
         "language_hrefs": {"en": "./", "ru": "../ru/services/", "es": "../es/services/", "fr": "../fr/services/"},
     },
     "ru/services/index.html": {
         "language": "ru",
-        "labels": ["Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
-        "hrefs": ["../../ru/#scope", "../../ru/#services", "./", "../../ru/#work", "../../ru/#method", "../../ru/#contact"],
+        "labels": ["Профиль", "Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
+        "hrefs": ["../../ru/#profile", "../../ru/#scope", "../../ru/#services", "./", "../../ru/#work", "../../ru/#method", "../../ru/#contact"],
         "language_hrefs": {"en": "../../services/", "ru": "./", "es": "../../es/services/", "fr": "../../fr/services/"},
     },
     "es/services/index.html": {
         "language": "es",
-        "labels": ["Perfil", "Áreas de trabajo", "Catálogo de servicios", "Proyectos", "Cómo trabajo", "Contacto"],
-        "hrefs": ["../../es/#profile", "../../es/#areas", "./", "../../es/#projects", "../../es/#approach", "../../es/#contact"],
+        "labels": ["Perfil", "Áreas de trabajo", "Servicios", "Catálogo completo", "Proyectos seleccionados", "Método", "Contacto"],
+        "hrefs": ["../../es/#profile", "../../es/#scope", "../../es/#services", "./", "../../es/#work", "../../es/#method", "../../es/#contact"],
         "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "./", "fr": "../../fr/services/"},
     },
     "fr/services/index.html": {
         "language": "fr",
-        "labels": ["Profil", "Domaines d’intervention", "Catalogue des services", "Projets", "Méthode", "Contact"],
-        "hrefs": ["../../fr/#profile", "../../fr/#areas", "./", "../../fr/#projects", "../../fr/#approach", "../../fr/#contact"],
+        "labels": ["Profil", "Domaines d’intervention", "Services", "Catalogue complet", "Projets sélectionnés", "Méthode", "Contact"],
+        "hrefs": ["../../fr/#profile", "../../fr/#scope", "../../fr/#services", "./", "../../fr/#work", "../../fr/#method", "../../fr/#contact"],
         "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "../../es/services/", "fr": "./"},
     },
 }
@@ -109,7 +109,7 @@ class NavigationContractTests(unittest.TestCase):
                 self.assertEqual(labels, expected["labels"])
                 self.assertEqual([item["attrs"].get("href") for item in menu], expected["hrefs"])
 
-                catalogue_current = menu[2]["attrs"].get("aria-current")
+                catalogue_current = menu[3]["attrs"].get("aria-current")
                 self.assertEqual(
                     catalogue_current,
                     "page" if route.endswith("services/index.html") else None,
