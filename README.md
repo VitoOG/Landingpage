@@ -1,6 +1,6 @@
-# Viktors Simonenko — Bilingual Engineering Website
+# Viktors Simonenko — Multilingual Engineering Website
 
-A static bilingual professional website for Viktors Simonenko, Systems Architect & Integration Engineer, and the engineering services offered through SIA “Golden Greens Crop”.
+A static multilingual professional website for Viktors Simonenko, Systems Architect & Integration Engineer, and the engineering services offered through SIA “Golden Greens Crop”.
 
 ## Public routes
 
@@ -8,10 +8,11 @@ A static bilingual professional website for Viktors Simonenko, Systems Architect
 |---|---|---|
 | `/` | English homepage | `index.html` |
 | `/ru/` | Russian homepage | `ru/index.html` |
+| `/es/` | Spanish personal profile | `es/index.html` |
 | `/services/` | English service catalogue | `services/index.html` |
 | `/ru/services/` | Russian service catalogue | `ru/services/index.html` |
 
-Each route is a separately maintained static HTML page. Language switches connect equivalent EN/RU routes.
+Each route is a separately maintained static HTML page. The Spanish `/es/` route is a concise personal profile focused on professional background and selected work; it intentionally does not reproduce the EN/RU service catalogue. Language switches lead to the closest equivalent profile.
 
 ## Identity and content boundaries
 
@@ -23,7 +24,7 @@ The supplied SVG in `assets/brand/` is the canonical Golden Greens Crop mark. It
 
 ## Architecture
 
-- **HTML:** four semantic, language-specific static pages.
+- **HTML:** five semantic, language-specific static pages.
 - **CSS:** shared design tokens, base styles, layout, components, responsive rules, and separate catalogue styling.
 - **JavaScript:** vanilla JavaScript for mobile navigation, footer year, catalogue loading, filtering, search and the offer-details dialog.
 - **Data:** `data/catalog.en.json` and `data/catalog.ru.json`, each containing 33 offers with matching IDs and fields.
@@ -44,7 +45,7 @@ The catalogue provides localized service descriptions, indicative prices, billin
 
 ## SEO and discovery
 
-`seo/site-config.json` defines the four public routes, canonical URLs, language groups, titles, descriptions and entity information. The managed HTML blocks contain canonical metadata, reciprocal `hreflang`, localized Open Graph metadata and JSON-LD. The schema distinguishes the Person, Organization, WebSite and page entities.
+`seo/site-config.json` defines the five public routes, canonical URLs, language groups, titles, descriptions and entity information. The managed HTML blocks contain canonical metadata, reciprocal `hreflang`, localized Open Graph metadata and JSON-LD. The schema distinguishes the Person, Organization, WebSite and page entities.
 
 - `scripts/apply_seo.py` generates managed metadata and the sitemap from the configuration. It is designed to be deterministic and idempotent; by default it makes a `.pre-seo-*.bak` backup before changing an existing file.
 - `scripts/verify_seo.py` checks route metadata, language alternates, JSON-LD, robots directives and sitemap consistency.
@@ -62,7 +63,7 @@ Run from the repository root:
 python3 -m http.server 8081 --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:8081/`, `/ru/`, `/services/` or `/ru/services/`.
+Open `http://127.0.0.1:8081/`, `/ru/`, `/es/`, `/services/` or `/ru/services/`.
 
 To regenerate SEO output intentionally:
 

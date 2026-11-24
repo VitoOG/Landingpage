@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ROUTES = {
     "index.html": "en",
     "ru/index.html": "ru",
+    "es/index.html": "es",
     "services/index.html": "en",
     "ru/services/index.html": "ru",
 }
