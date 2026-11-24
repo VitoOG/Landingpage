@@ -9,31 +9,37 @@ PAGES = {
         "language": "en",
         "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
         "hrefs": ["#scope", "#services", "services/", "#work", "#method", "#contact"],
-        "language_hrefs": {"en": "./", "ru": "ru/", "es": "es/"},
+        "language_hrefs": {"en": "./", "ru": "ru/", "es": "es/", "fr": "fr/"},
     },
     "ru/index.html": {
         "language": "ru",
         "labels": ["Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
         "hrefs": ["#scope", "#services", "services/", "#work", "#method", "#contact"],
-        "language_hrefs": {"en": "../", "ru": "./", "es": "../es/"},
+        "language_hrefs": {"en": "../", "ru": "./", "es": "../es/", "fr": "../fr/"},
     },
     "es/index.html": {
         "language": "es",
         "labels": ["Perfil", "Áreas de trabajo", "Proyectos", "Cómo trabajo", "Contacto"],
         "hrefs": ["#profile", "#areas", "#projects", "#approach", "#contact"],
-        "language_hrefs": {"en": "../", "ru": "../ru/", "es": "./"},
+        "language_hrefs": {"en": "../", "ru": "../ru/", "es": "./", "fr": "../fr/"},
+    },
+    "fr/index.html": {
+        "language": "fr",
+        "labels": ["Profil", "Domaines d’intervention", "Projets", "Méthode", "Contact"],
+        "hrefs": ["#profile", "#areas", "#projects", "#approach", "#contact"],
+        "language_hrefs": {"en": "../", "ru": "../ru/", "es": "../es/", "fr": "./"},
     },
     "services/index.html": {
         "language": "en",
         "labels": ["Scope", "Services", "Full catalogue", "Selected work", "Method", "Contact"],
         "hrefs": ["../#scope", "../#services", "./", "../#work", "../#method", "../#contact"],
-        "language_hrefs": {"en": "./", "ru": "../ru/services/", "es": "../es/"},
+        "language_hrefs": {"en": "./", "ru": "../ru/services/", "es": "../es/", "fr": "../fr/"},
     },
     "ru/services/index.html": {
         "language": "ru",
         "labels": ["Области работы", "Услуги", "Каталог услуг", "Проекты", "Метод", "Контакт"],
         "hrefs": ["../../ru/#scope", "../../ru/#services", "./", "../../ru/#work", "../../ru/#method", "../../ru/#contact"],
-        "language_hrefs": {"en": "../../services/", "ru": "./", "es": "../../es/"},
+        "language_hrefs": {"en": "../../services/", "ru": "./", "es": "../../es/", "fr": "../../fr/"},
     },
 }
 
@@ -107,7 +113,7 @@ class NavigationContractTests(unittest.TestCase):
                     for item in parser.links
                     if item["attrs"].get("lang")
                 }
-                self.assertEqual(set(language_links), {"en", "ru", "es"})
+                self.assertEqual(set(language_links), {"en", "ru", "es", "fr"})
                 self.assertEqual(
                     {lang: item["attrs"].get("href") for lang, item in language_links.items()},
                     expected["language_hrefs"],

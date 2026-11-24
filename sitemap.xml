@@ -5,6 +5,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://vitoog.github.io/Landingpage/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://vitoog.github.io/Landingpage/ru/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://vitoog.github.io/Landingpage/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vitoog.github.io/Landingpage/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vitoog.github.io/Landingpage/"/>
   </url>
   <url>
@@ -12,6 +13,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://vitoog.github.io/Landingpage/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://vitoog.github.io/Landingpage/ru/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://vitoog.github.io/Landingpage/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vitoog.github.io/Landingpage/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vitoog.github.io/Landingpage/"/>
   </url>
   <url>
@@ -19,6 +21,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://vitoog.github.io/Landingpage/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://vitoog.github.io/Landingpage/ru/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://vitoog.github.io/Landingpage/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vitoog.github.io/Landingpage/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vitoog.github.io/Landingpage/"/>
+  </url>
+  <url>
+    <loc>https://vitoog.github.io/Landingpage/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vitoog.github.io/Landingpage/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vitoog.github.io/Landingpage/ru/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://vitoog.github.io/Landingpage/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://vitoog.github.io/Landingpage/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vitoog.github.io/Landingpage/"/>
   </url>
   <url>
