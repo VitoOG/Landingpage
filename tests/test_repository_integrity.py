@@ -10,6 +10,7 @@ ROUTES = {
     "index.html": "en",
     "ru/index.html": "ru",
     "es/index.html": "es",
+    "fr/index.html": "fr",
     "services/index.html": "en",
     "ru/services/index.html": "ru",
 }
