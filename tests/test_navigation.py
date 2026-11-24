@@ -20,7 +20,7 @@ PAGES = {
     "es/index.html": {
         "language": "es",
         "labels": ["Perfil", "Áreas de trabajo", "Catálogo de servicios", "Proyectos", "Cómo trabajo", "Contacto"],
-        "hrefs": ["#profile", "#areas", "../services/", "#projects", "#approach", "#contact"],
+        "hrefs": ["#profile", "#areas", "services/", "#projects", "#approach", "#contact"],
         "language_hrefs": {"en": "../", "ru": "../ru/", "es": "./", "fr": "../fr/"},
     },
     "fr/index.html": {
@@ -45,13 +45,13 @@ PAGES = {
         "language": "es",
         "labels": ["Perfil", "Áreas de trabajo", "Catálogo de servicios", "Proyectos", "Cómo trabajo", "Contacto"],
         "hrefs": ["../../es/#profile", "../../es/#areas", "./", "../../es/#projects", "../../es/#approach", "../../es/#contact"],
-        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "./", "fr": "../../fr/services/"},
+        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "../../es/services/", "fr": "../../fr/services/"},
     },
     "fr/services/index.html": {
         "language": "fr",
         "labels": ["Profil", "Domaines d’intervention", "Catalogue des services", "Projets", "Méthode", "Contact"],
         "hrefs": ["../../fr/#profile", "../../fr/#areas", "./", "../../fr/#projects", "../../fr/#approach", "../../fr/#contact"],
-        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "../../es/services/", "fr": "./"},
+        "language_hrefs": {"en": "../../services/", "ru": "../../ru/services/", "es": "../../es/services/", "fr": "../../fr/services/"},
     },
 }
 
