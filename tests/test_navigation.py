@@ -19,14 +19,14 @@ PAGES = {
     },
     "es/index.html": {
         "language": "es",
-        "labels": ["Perfil", "Áreas de trabajo", "Proyectos", "Cómo trabajo", "Contacto"],
-        "hrefs": ["#profile", "#areas", "#projects", "#approach", "#contact"],
+        "labels": ["Perfil", "Áreas de trabajo", "Catálogo de servicios", "Proyectos", "Cómo trabajo", "Contacto"],
+        "hrefs": ["#profile", "#areas", "../services/", "#projects", "#approach", "#contact"],
         "language_hrefs": {"en": "../", "ru": "../ru/", "es": "./", "fr": "../fr/"},
     },
     "fr/index.html": {
         "language": "fr",
-        "labels": ["Profil", "Domaines d’intervention", "Projets", "Méthode", "Contact"],
-        "hrefs": ["#profile", "#areas", "#projects", "#approach", "#contact"],
+        "labels": ["Profil", "Domaines d’intervention", "Catalogue des services", "Projets", "Méthode", "Contact"],
+        "hrefs": ["#profile", "#areas", "../services/", "#projects", "#approach", "#contact"],
         "language_hrefs": {"en": "../", "ru": "../ru/", "es": "../es/", "fr": "./"},
     },
     "services/index.html": {
