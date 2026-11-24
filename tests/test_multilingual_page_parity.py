@@ -31,14 +31,17 @@ class MultilingualPageParityTests(unittest.TestCase):
                 self.assertIn('id="profile"', html)
                 self.assertIn('id="principles"', html)
 
-    def test_spatial_configurator_uses_the_same_canonical_url(self):
-        expected = "https://vitoog.github.io/golden-greens-spatial-system/"
-        for route in HOME_PAGES:
+    def test_spatial_configurator_links_to_the_matching_locale(self):
+        expected_urls = {
+            "index.html": "https://vitoog.github.io/golden-greens-spatial-system/",
+            "ru/index.html": "https://vitoog.github.io/golden-greens-spatial-system/",
+            "es/index.html": "https://vitoog.github.io/golden-greens-spatial-system/es/",
+            "fr/index.html": "https://vitoog.github.io/golden-greens-spatial-system/",
+        }
+        for route, expected in expected_urls.items():
             html = (ROOT / route).read_text(encoding="utf-8")
             with self.subTest(route=route):
                 self.assertIn(expected, html)
-                self.assertNotIn(expected + "es/", html)
-                self.assertNotIn(expected + "fr/", html)
 
 
 if __name__ == "__main__":
