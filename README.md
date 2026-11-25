@@ -46,8 +46,6 @@ There is no framework, package manager, Node build, generated frontend bundle or
 
 The catalogue provides localized service descriptions, indicative prices, billing models, intended buyers, problems addressed, deliverables and scope boundaries. Internal sales-planning fields are not part of the public data.
 
-The English and Russian catalogues also feature a separately scoped **System Integration Review** pilot. It is not counted as one of the 33 indicative catalogue offers. The current intake is email-based, with scope confirmation and invoicing before work starts; card checkout and automated order processing are not enabled. See [docs/PAID-REVIEW-MVP.md](docs/PAID-REVIEW-MVP.md).
-
 ## SEO and discovery
 
 `seo/site-config.json` defines the six public routes, canonical URLs, language groups, titles, descriptions and entity information. The managed HTML blocks contain canonical metadata, reciprocal `hreflang`, localized Open Graph metadata and JSON-LD. The schema distinguishes the Person, Organization, WebSite and page entities.
